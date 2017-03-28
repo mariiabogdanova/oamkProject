@@ -788,7 +788,7 @@ var l3link = {
         deeplinks: [{
             link: {
                 title: "Quit for Life",
-                url: "https://uat.myquitforlife.com/tmobile"
+                url: "http://www.myquitforlife.com/tmobile"
             }
         }],
         search_tags: '',
@@ -1978,7 +1978,7 @@ var l3_page_mob = {
         deeplinks: [{
             link: {
                 title: "Quit for Life",
-                url: "https://uat.myquitforlife.com/tmobile"
+                url: "http://www.myquitforlife.com/tmobile"
             }
         }],
         search_tags: '',
