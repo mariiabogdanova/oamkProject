@@ -180,7 +180,8 @@ var l3link = {
         }],
         search_tags: 'Coping with PTS',
         intro: 'For help during difficult times, call a life coach 24/7 or access resources online.',
-        deepdesc: 'Experiencing difficult times, trying to help a family member, or looking to learn how to help support and encourage someone in an emotional or mental health crisis? <br><br>Call a life coach 24/7 or access resources online at LiveandWorkWell.com. If prompted, use code: <b>livemagenta</b>.',
+        deepdesc: 'When you’re feeling overwhelmed and need help taking the next step, you’re covered.<br><br>Find reliable answers and support for personal, physical and emotional health questions and situations. Call a life coach 24/7. <b>You can also</b> access resources online <b>for everything from family, work and relationships to autism, well-being and beyond at</b> LiveandWorkWell.com. If prompted, use code: <b>livemagenta.</b> ',
+
         apps: {
             primary_app: {
 
@@ -475,7 +476,7 @@ var l3link = {
             }
         }],
         search_tags: 'Family Budgeting',
-        intro: 'Whatever your financial state of affairs, the money coaches at My Secure Advantage will help you. NEW – budgeting video',
+        intro: 'Whatever your financial state of affairs, the money coaches at My Secure Advantage will help you.',
         deepdesc: "Paying off debt and improving credit? Building a budget? Planning for college?<br><br>Whatever your financial state of affairs, the money coaches at My Secure Advantage will help you overcome roadblocks, make decisions and answer your questions.  Seriously, free money coaching – just for you. Sign up today and get started.<br><br>Money coaches are available by appointment 6 a.m. to 8 p.m. PT, Monday through Friday. Register online, by creating a username and password or call 888-724-2326 for help getting started.",
         apps: {
             primary_app: {
@@ -687,7 +688,7 @@ var l3link = {
         }],
         search_tags: '',
         intro: 'Need help taking the next step? Life coaches are available 24/7.',
-        deepdesc: "When you’re feeling overwhelmed and need help taking the next step, you’re covered.<br><br>Find reliable answers and support for personal, physical and emotional health questions and situations. Call a life coach 24/7 or access resources online at LiveandWorkWell.com. If prompted, use code: <b>livemagenta</b>.",
+        deepdesc: "When you’re feeling overwhelmed and need help taking the next step, you’re covered.<br><br>Find reliable answers and support for personal, physical and emotional health questions and situations. Call a life coach 24/7. You can also access resources online for everything from family, work and relationships to autism, well-being and beyond at LiveandWorkWell.com. If prompted, use code: <b>livemagenta.</b>",
         apps: {
             primary_app: {
 
@@ -788,7 +789,7 @@ var l3link = {
         deeplinks: [{
             link: {
                 title: "Quit for Life",
-                url: "https://uat.myquitforlife.com/tmobile"
+                url: "http://www.myquitforlife.com/tmobile"
             }
         }],
         search_tags: '',
@@ -1665,7 +1666,7 @@ var l3_page_mob = {
             }
         }],
         search_tags: 'Family Budgeting',
-        intro: 'Whatever your financial state of affairs, the money coaches at My Secure Advantage will help you. NEW – budgeting video',
+        intro: 'Whatever your financial state of affairs, the money coaches at My Secure Advantage will help you.',
         deepdesc: "Paying off debt and improving credit? Building a budget? Planning for college?<br><br>Whatever your financial state of affairs, the money coaches at My Secure Advantage will help you overcome roadblocks, make decisions and answer your questions.  Seriously, free money coaching – just for you. Sign up today and get started.<br><br>Money coaches are available by appointment 6 a.m. to 8 p.m. PT, Monday through Friday. Register online, by creating a username and password or call 888-724-2326 for help getting started.",
         apps: {
             primary_app: {
@@ -1978,7 +1979,7 @@ var l3_page_mob = {
         deeplinks: [{
             link: {
                 title: "Quit for Life",
-                url: "https://uat.myquitforlife.com/tmobile"
+                url: "http://www.myquitforlife.com/tmobile"
             }
         }],
         search_tags: '',
