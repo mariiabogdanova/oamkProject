@@ -180,8 +180,7 @@ var l3link = {
         }],
         search_tags: 'Coping with PTS',
         intro: 'For help during difficult times, call a life coach 24/7 or access resources online.',
-        deepdesc: 'When you’re feeling overwhelmed and need help taking the next step, you’re covered.<br><br>Find reliable answers and support for personal, physical and emotional health questions and situations. Call a life coach 24/7. <b>You can also</b> access resources online <b>for everything from family, work and relationships to autism, well-being and beyond at</b> LiveandWorkWell.com. If prompted, use code: <b>livemagenta.</b> ',
-
+        deepdesc: 'Experiencing difficult times, trying to help a family member, or looking to learn how to help support and encourage someone in an emotional or mental health crisis? <br><br>Call a life coach 24/7 or access resources online at LiveandWorkWell.com. If prompted, use code: <b>livemagenta</b>.',
         apps: {
             primary_app: {
 
@@ -789,7 +788,7 @@ var l3link = {
         deeplinks: [{
             link: {
                 title: "Quit for Life",
-                url: "http://www.myquitforlife.com/tmobile"
+                url: "https://uat.myquitforlife.com/tmobile"
             }
         }],
         search_tags: '',
@@ -1979,7 +1978,7 @@ var l3_page_mob = {
         deeplinks: [{
             link: {
                 title: "Quit for Life",
-                url: "http://www.myquitforlife.com/tmobile"
+                url: "https://uat.myquitforlife.com/tmobile"
             }
         }],
         search_tags: '',
