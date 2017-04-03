@@ -2,6 +2,7 @@
 	background: #808080;
 	height: 60px;
 	padding: 10px;
+
 }
 .welcomeBlock {
 	background: white;
@@ -20,7 +21,66 @@
 	font-size: 20px;
 	margin-left: 0px;
 	margin-right: 0px;
+	border-top:5px solid white;
+	border-bottom-left-radius: 20px;
+	min-height: 500px;
+}
+.contentArea{
+	background: #808080;
+	color:white;
+	font-size: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+	border-top:5px solid white;
+	border-left:5px solid white;
+	border-bottom-right-radius: 20px;
+	min-height: 500px;
+	
 }
 .contentBlock{
 	padding: 0px;
+}
+.MainMenu{
+	
+	color:white;
+	cursor: pointer;
+	font-weight: normal;
+	font-size: 16px;
+	padding-top: 15px;
+	 text-transform: uppercase;
+}
+.SubMenu{
+	padding-left:20px;
+}
+.SubMenu {
+	color:#ccc !important;
+	cursor: pointer;
+	font-weight: normal;
+	font-size: 14px;
+	 text-transform: uppercase;
+	
+}
+.SubMenu a{
+	color:#ccc !important;
+	cursor: pointer;
+	margin-left:5px;
+}
+.SubMenu a:hover,SubMenu :hover,.SubMenu a.active{
+	color:#fff !important;
+	cursor: pointer;
+	font-weight: bold;
+	
+}
+.loading {
+	background: url(../images/waiting.gif) no-repeat center center;
+	height: 100px;
+	width: 100px;
+	position: fixed;
+	z-index: 3100;
+	left: 50%;
+	top: 40%;
+	margin: -25px 0 0 -25px;
+}
+.modal-backdrop {
+    opacity: 0.7 !important;
 }
