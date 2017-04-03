@@ -1,0 +1,26 @@
+.header {
+	background: #808080;
+	height: 60px;
+	padding: 10px;
+}
+.welcomeBlock {
+	background: white;
+	height: 90px;
+	padding: 5px;
+	border-bottom: 20px solid #808080;
+}
+.oragne_text_header {
+	font-size: 30px;
+	font-weight: bold;
+	padding: 10px;
+}
+.menus{
+	background: #808080;
+	color:white;
+	font-size: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.contentBlock{
+	padding: 0px;
+}
