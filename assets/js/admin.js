@@ -15,7 +15,6 @@ var adminMenuArray = [{
 	items: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"],
 	fnct: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"]
 }];
-
 function bodyLoaded() {
 	var bug_Test = false;
 	if (bug_Test == true) {
@@ -25,13 +24,11 @@ function bodyLoaded() {
 		adminFunctions();
 	}
 }
-
 function showLogin() {
 	$('#login-page').show();
 	$('#logged-in-page').hide();
 	$('.form-login input').val('');
 }
-
 function adminFunctions() {
 	$(document).on("click", "#sign_in", function () {
 		doLogin();
@@ -40,7 +37,6 @@ function adminFunctions() {
 		doLogOut();
 	});
 }
-
 function doLogin() {
 	var username = $('#user_name').val();
 	var password = $('#password').val();
@@ -51,13 +47,9 @@ function doLogin() {
 		alert("INCORRECT");
 	}
 }
-
 function doLogOut() {
-
 	showLogin();
-
 }
-
 function showLoggedInPage() {
 	$('#login-page').hide();
 	$('#logged-in-page').show();
@@ -75,17 +67,14 @@ function showLoggedInPage() {
 		showContent($(this).attr("ref_id"));
 	});
 }
-
 function showContent(ref_id) {
 	showLoading();
 	$('.contentArea').html(ref_id + " content goes here");
 	stopLoading();
 }
-
 function showLoading() {
 	$('.loading').show();
 }
-
 function stopLoading() {
 	$('.loading').fadeOut("slow");
 }
