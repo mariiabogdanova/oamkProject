@@ -1,7 +1,7 @@
 var adminMenuArray = [{
 	group: "Manage Teachers",
 	items: ["Add Teacher", "Remove Teacher", "Manage Groups", "Analytics"],
-	fnct: ["Add Teacher", "Remove Teacher", "Manage Groups", "Analytics"]
+	fnct: ["add_teacher", "Remove Teacher", "manage_groups", "Analytics"]
 }, {
 	group: "Manage Students",
 	items: ["Add Students", "Assign Groups", "Analytics"],
@@ -25,6 +25,7 @@ function bodyLoaded() {
 	}
 }
 function showLogin() {
+	
 	$('#login-page').show();
 	$('#logged-in-page').hide();
 	$('.form-login input').val('');
@@ -68,8 +69,12 @@ function showLoggedInPage() {
 	});
 }
 function showContent(ref_id) {
+	$('.contentArea .container').hide();
 	showLoading();
-	$('.contentArea').html(ref_id + " content goes here");
+	
+	//if(ref_id='add_teacher'){
+			$('#'+ref_id).show();
+	//}
 	stopLoading();
 }
 function showLoading() {
@@ -77,4 +82,10 @@ function showLoading() {
 }
 function stopLoading() {
 	$('.loading').fadeOut("slow");
+}
+
+function addTeacher(){
+	var form='<div><form><input type="text"></from></div>';
+	$('.contentArea').html(form);
+	
 }
