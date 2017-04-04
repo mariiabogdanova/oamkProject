@@ -16,7 +16,7 @@ var adminMenuArray = [{
 	fnct: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"]
 }];
 function bodyLoaded() {
-	var bug_Test = false;
+	var bug_Test = true;
 	if (bug_Test == true) {
 		showLoggedInPage()
 	} else {
@@ -75,6 +75,9 @@ function showContent(ref_id) {
 	//if(ref_id='add_teacher'){
 			$('#'+ref_id).show();
 	//}
+	if(ref_id=='manage_groups'){
+		manage_groups();
+	}
 	stopLoading();
 }
 function showLoading() {
@@ -88,4 +91,43 @@ function addTeacher(){
 	var form='<div><form><input type="text"></from></div>';
 	$('.contentArea').html(form);
 	
+}
+
+
+function manage_groups()
+{
+$('#create_group_form').hide();
+$('#remove_group_form').hide();
+$('#edit_groups_form').hide();
+$(document).on("click", "#create_group", function () {
+
+create_group();
+});
+
+$(document).on("click", "#remove_group", function () {
+
+remove_group();
+});
+
+$(document).on("click", "#edit_groups", function () {
+
+edit_groups();
+});
+
+}
+
+
+function create_groups()
+{
+$('#create_group_form').show();
+}
+
+function remove_group()
+{
+$('#remove_group_form').show();	
+}
+
+function edit_groups()
+{
+$('#edit_groups_form').show();
 }
