@@ -99,3 +99,7 @@ body {
 	height: 200px;
 
 }
+#videoBox {
+	background-color: dimgrey;
+	height: 150px;
+}
