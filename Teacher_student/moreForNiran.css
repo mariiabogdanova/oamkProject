@@ -14,15 +14,17 @@
 #pollHeader {
 
     background-color: orange ;
-    
+    color:white;
 }
 
 #pollQuestions {
 
     background-color: white ;
+    color: black;
     
 }
 #pollResultHeader {
 
     background-color: orange;
+    color: white;
 }
