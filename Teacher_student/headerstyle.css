@@ -39,3 +39,33 @@ body {
 {
 	background-color: white, 0.5;
 }
+#footerForAll{
+
+    float: centered;
+    background-color: white ;
+
+}
+
+#pollBoxes{
+
+    float:right ;
+
+}
+
+#pollHeader {
+
+    background-color: orange ;
+    color:white;
+}
+
+#pollQuestions {
+
+    background-color: white ;
+    color: black;
+    
+}
+#pollResultHeader {
+
+    background-color: orange;
+    color: white;
+}
