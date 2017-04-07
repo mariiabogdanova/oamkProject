@@ -11,6 +11,7 @@ h5 {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-left: 8px;
+
 	color: white;
 }
 
@@ -37,35 +38,11 @@ body {
 
 #white_thingy
 {
-	background-color: white, 0.5;
-}
-#footerForAll{
-
-    float: centered;
-    background-color: white ;
-
+	background: rgba(255, 255, 255, 0.3);
 }
 
-#pollBoxes{
-
-    float:right ;
-
-}
-
-#pollHeader {
-
-    background-color: orange ;
-    color:white;
-}
-
-#pollQuestions {
-
-    background-color: white ;
-    color: black;
-    
-}
-#pollResultHeader {
-
-    background-color: orange;
-    color: white;
+#orange_thingy
+{
+	background-color: orange;
+	padding-top: 10px;
 }
