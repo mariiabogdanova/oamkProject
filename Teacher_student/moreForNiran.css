@@ -1,0 +1,28 @@
+#footerForAll{
+
+    float: centered;
+    background-color: white ;
+
+}
+
+#pollBoxes{
+
+    float:right ;
+
+}
+
+#pollHeader {
+
+    background-color: orange ;
+    
+}
+
+#pollQuestions {
+
+    background-color: white ;
+    
+}
+#pollResultHeader {
+
+    background-color: orange;
+}
