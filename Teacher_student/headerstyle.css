@@ -1,0 +1,41 @@
+hr {
+  color: : black;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h5 {
+	background-color: orange;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+	color: white;
+}
+
+ul{
+	background-color: white;
+	float: left;
+	padding-right: 70px;
+
+}
+
+#line{
+	background-color: orange;
+}
+
+body {
+	background-image: url("OuluWinter.jpg");
+	background-position: top 200px;
+	background-size: 100%;
+}
+
+#nobackground{
+	background-color: white;
+}
+
+#white_thingy
+{
+	background-color: white, 0.5;
+}
