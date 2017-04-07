@@ -38,6 +38,7 @@ body {
 
 #white_thingy
 {
+
 	background: rgba(255, 255, 255, 0.3);
 }
 
@@ -45,4 +46,56 @@ body {
 {
 	background-color: orange;
 	padding-top: 10px;
+
+
+}
+
+
+#footerForAll{
+
+    float: centered;
+    background-color: rgba(255, 255, 255, 0.3) ;
+	text-align: center;
+	background-image: none;
+	height: 50px;
+}
+
+
+
+#pollHeader {
+
+    background-color: orange ;
+    color:white;
+	
+}
+
+#pollQuestions {
+
+    background-color: white ;
+    color: black;
+   
+}
+#pollResultHeader {
+
+    background-color: orange;
+    color: white;
+}
+#pollAnalyzis {
+
+	background-color: white;
+	color:black;
+
+
+}
+
+#mainContent {
+
+	margin-left: 75px;
+	margin-right: 25px;
+}
+#newsContent {
+
+	background-color: rgba(255, 255, 255, 0.3) ;
+	height: 200px;
+
 }

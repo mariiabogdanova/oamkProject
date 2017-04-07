@@ -1,19 +1,19 @@
 <?php 
-include header.php;
-include poll.php ;
+include "header.php" ;
+include "poll.php" ;
 ?>
-<h2>Headlines or news or smth here</h2>
+
 <br />
 <div id="mainContent">
 
-    <button id="teacherNote" style="btn btn-warning" >Teacher's note</button>
-    <button id="studentNews" style="btn btn-warning" >Your news</button>
+    <button id="teacherNote" class="btn btn-warning bnt-xs" >Teacher's note</button>
+    <button id="studentNews" class="btn btn-warning bnt-xs" >Your news</button>
     <br />
-       <div="newsContent" > 
+       <div id="newsContent"  > 
             NEWS! we got something done and smths are making us depressed, byt hey, its all progress! !NEWS
 
        </div>
-       <br />
+       <br>
        <div id="videoBox">
 
            Here one embedds those kickass videos :D
@@ -21,4 +21,4 @@ include poll.php ;
 </div>
 
 
-<?php include footerForAll.php; ?>
+<?php include "footerForAll.php" ; ?>
