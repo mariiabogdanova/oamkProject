@@ -6,8 +6,8 @@ include poll.php ;
 <br />
 <div id="mainContent">
 
-    <button id="teacherNote" style="btnButton-danger" >Teacher's note</button>
-    <button id="studentNews" style="btnButton-danger" >Your news</button>
+    <button id="teacherNote" style="btn btn-warning" >Teacher's note</button>
+    <button id="studentNews" style="btn btn-warning" >Your news</button>
     <br />
        <div="newsContent" > 
             NEWS! we got something done and smths are making us depressed, byt hey, its all progress! !NEWS
