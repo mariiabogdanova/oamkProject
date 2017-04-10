@@ -2,8 +2,6 @@
 
 	define( 'parentFile' , 1 ); 
 	require_once( 'db_include.php' );	
-
-
 $username=$_POST["teacher_username"];
 $password=$_POST["teacher_password"];
 $password=md5($password);
@@ -19,3 +17,6 @@ $result = mysql_query($query);
        
    print_r(json_encode($output));
 ?>
+
+
+

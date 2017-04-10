@@ -193,7 +193,8 @@ function manager_teachers() {
 	
 
     $(document).on("click", "#create_new_teacher", function() {
-  $('.form-login input').val('');
+ $('#teacher_username').val('');
+$('#teacher_password').val('');
         $('#add_techer_form').show();
     });
 
@@ -207,14 +208,22 @@ function manager_teachers() {
 
 
 function createNewTeacher(){
-	 showLoading();
+	
 	   var teacher_username = $('#teacher_username').val();
         var teacher_password = $('#teacher_password').val();
-        var request = getRequestObject({
+	
+	if(teacher_password.length<3 && teacher_username.length<3 )
+		{
+			showPop("Failed", "Please provide proper username and password.");
+			
+		}else{
+			 showLoading();
+			  var request = getRequestObject({
             teacher_username: teacher_username,
             teacher_password: teacher_password
         }, "CREATENEWUSER");
-        $.post(SERVER_URL, request, function(result) {stopLoading();
+        $.post(SERVER_URL, request, function(result) {
+			stopLoading();
             if (result.RESULT == "SUCCESS") {
 				
 				
@@ -225,8 +234,12 @@ function createNewTeacher(){
  				showPop("Failed", "A user with username: " + teacher_username + " already exists, please try another.");
             }
         }, "json");
+			
+			
+		}
+      
 }
-function showPop(title, password) {
+function showPop(title, body) {
     $('#alert_popup_title').html(title);
     $('#alert_popup_content').html(body);
     $('#alert_popup').modal();
