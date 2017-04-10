@@ -1,5 +1,5 @@
-<div id="pollBoxes" class="container poll">
-    <div class="row poll">
+<div id="pollBoxes" class="container">
+    <div class="row">
     <div class="col-xs-3 col-xs-offset-8">
     
         <p id="pollHeader"   >Enter the poll header here: </p>
