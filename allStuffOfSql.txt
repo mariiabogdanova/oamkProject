@@ -2,13 +2,32 @@
 
 USER TABLE
 
-  INSERT INTO users (user_name,password,access_level) VALUES("teacher_name,password, 25);
+    INSERT INTO users (user_name,password,access_level) VALUES("teacher_name,password, 25);
   
-  DELETE FROM users WHERE user_name = "teacher_name";
+    DELETE FROM users WHERE user_name = "teacher_name";
 
-  SELECT user_name,id FROM users;
+    SELECT user_name,id FROM users;
+
+
 
 GROUPS TABLE
 
-    INSERT INTO groups (group_id,group_name,group_tutor) VALUES( )
+    
+        $group_name=$_POST["group_name"];
+        $group_tutor=$_POST["group_tutor"];
+        $query="INSERT INTO groups (group_name,group_tutor) VALUES('$group_name','$group_tutor')";
+
+        
+        $query="SELECT group_name,group_tutor FROM groups";
+
+
+
+        $query="UPDATE groups SET group_tutor = "group_tutor" WHERE group_name = "group_name"";
+
+ 
+        DELETE FROM groups WHERE group_name="group_name" ;
+
+STUDENTS TABLE
+
+    INSERT INTO students
 
