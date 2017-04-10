@@ -26,8 +26,8 @@
 	min-height: 900px;
 }
 .contentArea{
-	background: #808080;
-	color:white;
+	background: #F0F0F0;
+	color:gray;
 	font-size: 20px;
 	margin-left: 0px;
 	margin-right: 0px;
@@ -86,10 +86,11 @@
 .modal-backdrop {
     opacity: 0.7 !important;
 }
-#add_teacher{
+#add_teacher,#manage_groups{
 	font-size: 10;
-	width:300px;
+	width:100%;
 }
 label{
 	font-size: 13px;
 }
+

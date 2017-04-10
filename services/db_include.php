@@ -16,11 +16,11 @@ else if($LOCAL_SITE==true)
 {
 defined( 'parentFile' ) or die( 'You Can Not Access This File' );
 define( "DATABASE_SERVER", "localhost" );
-define( "DATABASE_NAME", "menproject" );
+define( "DATABASE_NAME", "ouasnews" );
 define( "DATABASE_USERNAME", "root" );
-define( "DATABASE_PASSWORD", "" );
+define( "DATABASE_PASSWORD", "a" );
 define("USER_ROLE_ADMIN",10);
-define("USER_ROLE_USERS",5);
+define("USER_ROLE_TEACHER",5);
 define("ROOT",$_SERVER['DOCUMENT_ROOT']);
 date_default_timezone_set('America/Los_Angeles'); 
 }

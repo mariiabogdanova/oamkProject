@@ -1,0 +1,14 @@
+
+
+USER TABLE
+
+  INSERT INTO users (user_name,password,access_level) VALUES("teacher_name,password, 25);
+  
+  DELETE FROM users WHERE user_name = "teacher_name";
+
+  SELECT user_name,id FROM users;
+
+GROUPS TABLE
+
+    INSERT INTO groups (group_id,group_name,group_tutor) VALUES( )
+
