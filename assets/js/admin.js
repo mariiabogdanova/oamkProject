@@ -17,21 +17,35 @@ var adminMenuArray = [{
 }];
 var student_links=new Array();
 function bodyLoaded() {
-	var bug_Test = true;
+	var bug_Test = false;
 	if (bug_Test == true) {
 		showLoggedInPage()
 	} else {
 		showLogin();
-		adminFunctions();
+		
 	}
 }
 
 function showLogin() {
+	
+	if (($.cookie('oamk_admin_userinfo') != null)) {
+         userLoginJsn = JSON.parse($.cookie('oamk_admin_userinfo'));
+         setUserToLoggedin(userLoginJsn.oamk_userid, userLoginJsn.oamk_username, userLoginJsn.oamk_useraccesstoken);
+     } else {
+
 	$('#login-page').show();
 	$('#logged-in-page').hide();
+	adminFunctions();
+     }
 }
 
 function adminFunctions() {
+	
+	
+	
+	
+	
+	
 	$(document).on("click", "#sign_in", function () {
 		doLogin();
 	});
@@ -43,16 +57,18 @@ function adminFunctions() {
 function doLogin() {
 	var username = $('#user_name').val();
 	var password = $('#password').val();
-	if (username == "test" && password == "test") {
-		alert("CORRECT");
-		showLoggedInPage();
+	if (username != "" && password != "") {
+		
+		userLoginFunction(username,password);
+		
 	} else {
-		alert("INCORRECT");
+		showPop("Invalid","Enter proper username/password.");
 	}
 }
 
 function doLogOut() {
-	showLogin();
+	setUserToLoggedOut();
+	//showLogin();
 }
 
 function showLoggedInPage() {
