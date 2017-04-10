@@ -4,6 +4,10 @@
 		switch( $appservice ) {			
 			case "USERLOGIN" : require 'services/UserLogin.php';
 			break;	
+            case "CREATENEWUSER" : require 'services/CreateUser.php';
+			break; 
+			case "GETTEACHERS" : require 'services/GetTeachers.php';
+			break;	
             
 		}
 	    

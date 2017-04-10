@@ -9,10 +9,6 @@
 	<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../assets/css/ouas.css" rel="stylesheet">
 	<link href="../assets/css/ouas_Admin.css" rel="stylesheet">
-
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.13/datatables.min.css" />
-
-
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -22,7 +18,7 @@
 </head>
 
 <body class="row" onload="bodyLoaded()" ng-app="tmApp" ng-controller="tmController">
-
+	
 	<div class="loading modal-backdrop" style="display:none"></div>
 	<div id="login-page" style="display:none">
 		<div class="container">
@@ -53,8 +49,6 @@
 	</div>
 	<div id="logged-in-page" style="display:none" class="row">
 		<div class="container">
-			
-			
 			<div class="container header">
 				<div class="col-xs-2 col-xs-offset-10">
 					<div id="log_out" class="btn btn-danger btn-block">LOG OUT</div>
@@ -69,111 +63,99 @@
 				</div>
 			</div>
 			<div class="container contentBlock">
-
-
-
-
-
-
-
 				<div class="col-xs-3 menus">
 					<div id="menu_content"></div>
 				</div>
 				<div class="col-xs-9 contentArea">
-					<div id="add_teacher" class="container " style="display:none">
 
+					<div id="add_teacher"  class="container "style="display:none">
 
-						<div id="old_teachers" class="col-xs-12">
-							<div>
-								<div class="col-xs-10">
-
-								</div>
-								<div class="col-xs-2">
-									<div class="btn btn-success" id="create_new_teacher">Create New</div>
-								</div>
-							</div>
-							<div class="col-xs-12">
-								<table id="old_teachers_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-
-									<thead>
-
-										<th>S.No.</th>
-										<th>Username</th>
-										<th>Created Date</th>
-										<th>Options</th>
-									</thead>
-									<tbody id="old_teachers_line">
-										
-									</tbody>
-
-								</table>
-
-							</div>
+						<div class="form-group">
+							<label for="name">Teacher First Name:</label>
+							<input type="text" class="form-control" id="teacher_name">
 						</div>
-						<div class="col-xs-12" id="add_techer_form">
-							<div class="form-group">
-								<label for="name">Username:</label>
-								<input type="text" class="form-control" id="teacher_username">
-							</div>
-
-							<div class="form-group">
-								<label for="pwd">Password:</label>
-								<input type="password" class="form-control" id="teacher_password">
-							</div>
-
-							<div class="btn btn-default" id="create_new_teacher_save">Create New</div>
-
-
+						<div class="form-group">
+							<label for="name">Teacher Last Name:</label>
+							<input type="text" class="form-control" id="teacher_name">
 						</div>
+						<div class="form-group">
+							<label for="name">Room Number:</label>
+							<input type="text" class="form-control" id="teacher_name">
+						</div>
+						
+						<div class="form-group">
+							<label for="name">Phone Number:</label>
+							<input type="text" class="form-control" id="teacher_name">
+						</div>
+						<div class="form-group">
+							<label for="email">Email address:</label>
+							<input type="email" class="form-control" id="teacher_email">
+						</div>
+						<div class="form-group">
+							<label for="pwd">Password:</label>
+							<input type="password" class="form-control" id="teacher_pwd">
+						</div>
+						
+						<div class="btn btn-default">Save Teacher</div>
+
+
+					</div>
+
+				
+				
+					
+					
+					<div id="manage_groups"  class="container" style="display:none">
+					
+					<button id="create_group" type="button" class="btn btn-warning">Create</button>
+					<button id="remove_group" type="button" class="btn btn-warning">Remove</button>
+					<button id="edit_groups" type="button" class="btn btn-warning">Edit</button>
+					
+					<div id="create_group_form">
+						
+  							<div class="form-group">
+    							<label for="group_code">Group Code</label>
+    								<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Group code">
+  					</div>
+  					<div class="dropdown">
+    					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select tutor teacher
+    						<span class="caret"></span></button>
+    							<ul class="dropdown-menu">
+      							<li><a href="#">Susanna</a></li>
+      							<li><a href="#">Heli</a></li>
+      							<li><a href="#">Niran</a></li>
+    							</ul>
+  					</div>
+					</div>
+  					</div>
+						
+
+
+					</div>
+
+					<div id="remove_group_form">
+						
+					
+
+					</div>
+
+					<div id="edit_groups">
+					
 
 
 					</div>
 
 
-					<div id="manage_groups" class="container" style="display:none">
-						your form here
-
 					</div>
 
 
 
-				</div>
-
-
-
-
-
-
-
-
-
-
-			</div>
-		</div>
-	</div>
-
-
-		
-	<div class="modal fade" id="alert_popup" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="alert_popup_title"></h4>
-				</div>
-				<div class="modal-body" id="alert_popup_content">
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
 			</div>
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.13/datatables.min.js"></script>
 	<script src="../assets/js/bootstrap.js"></script>
 	<script src="../assets/js/admin.js"></script>
 	<script src="../assets/js/services.js"></script>

@@ -26,8 +26,8 @@
 	min-height: 900px;
 }
 .contentArea{
-	background: #808080;
-	color:white;
+	background: #F0F0F0;
+	color:gray;
 	font-size: 20px;
 	margin-left: 0px;
 	margin-right: 0px;
@@ -88,8 +88,9 @@
 }
 #add_teacher{
 	font-size: 10;
-	width:300px;
+	width:100%;
 }
 label{
 	font-size: 13px;
 }
+
