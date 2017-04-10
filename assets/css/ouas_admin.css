@@ -28,7 +28,7 @@
 .contentArea{
 	background: #F0F0F0;
 	color:gray;
-	font-size: 20px;
+	font-size: 14px;
 	margin-left: 0px;
 	margin-right: 0px;
 	border-top:5px solid white;
@@ -37,6 +37,7 @@
 	min-height: 900px;
 	height: 100%;
 	padding:20px;
+	border-right: 1px solid #E8E8E8;
 	
 }
 .contentBlock{
@@ -86,11 +87,31 @@
 .modal-backdrop {
     opacity: 0.7 !important;
 }
-#add_teacher,#manage_groups,#Analytics_teacher_group{
+#add_teacher,#manage_groups,#Analytics_teacher_group,#manage_students{
 	font-size: 10;
 	width:100%;
 }
 label{
 	font-size: 13px;
 }
-
+.col-form-label{
+	    padding: 10px;
+    text-align: right;
+}
+.input-group{
+	margin:2px;
+	
+}
+.centered{
+	text-align: center;
+	margin: auto;
+}
+.student_btn{
+	    margin-top: 4px;
+}
+.dataTables_wrapper {
+	margin-top:10px;
+}
+.container{
+	max-width:1300px!important;
+}

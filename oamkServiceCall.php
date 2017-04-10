@@ -16,6 +16,12 @@
 			break;
 			case "TEACHER_GROUP_ANALYTICS" : require 'services/teacher_group_analytics.php';
 			break;	
+			case "GETGROUPANDTEACHER" : require 'services/GetGroupandTeacher.php';
+			break;	
+			case "SAVESTUDENT" : require 'services/SaveStudent.php';
+			break;
+			case "GETALLSTUDENTS" : require 'services/GetAllStudents.php';
+			break;	
             
 		}
 	    

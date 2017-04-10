@@ -9,10 +9,7 @@
 	<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../assets/css/ouas.css" rel="stylesheet">
 	<link href="../assets/css/ouas_Admin.css" rel="stylesheet">
-
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.13/datatables.min.css" />
-
-
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -21,8 +18,7 @@
     <![endif]-->
 </head>
 
-<body class="row" onload="bodyLoaded()" ng-app="tmApp" ng-controller="tmController">
-
+<body onload="bodyLoaded()" ng-app="tmApp" ng-controller="tmController">
 	<div class="loading modal-backdrop" style="display:none"></div>
 	<div id="login-page" style="display:none">
 		<div class="container">
@@ -53,8 +49,6 @@
 	</div>
 	<div id="logged-in-page" style="display:none" class="row">
 		<div class="container">
-			
-			
 			<div class="container header">
 				<div class="col-xs-2 col-xs-offset-10">
 					<div id="log_out" class="btn btn-danger btn-block">LOG OUT</div>
@@ -69,24 +63,14 @@
 				</div>
 			</div>
 			<div class="container contentBlock">
-
-
-
-
-
-
-
 				<div class="col-xs-3 menus">
 					<div id="menu_content"></div>
 				</div>
 				<div class="col-xs-9 contentArea">
 					<div id="add_teacher" class="container " style="display:none">
-
-
 						<div id="old_teachers" class="col-xs-12">
 							<div>
 								<div class="col-xs-10">
-
 								</div>
 								<div class="col-xs-2">
 									<div class="btn btn-success" id="create_new_teacher">Create New</div>
@@ -94,20 +78,15 @@
 							</div>
 							<div class="col-xs-12">
 								<table id="old_teachers_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-
 									<thead>
-
-										<th>S.No.</th>
+										<th width="30px">S.No.</th>
 										<th>Username</th>
 										<th>Created Date</th>
 										<th>Options</th>
 									</thead>
 									<tbody id="old_teachers_line">
-										
 									</tbody>
-
 								</table>
-
 							</div>
 						</div>
 						<div class="col-xs-12" id="add_techer_form">
@@ -115,26 +94,17 @@
 								<label for="name">Username:</label>
 								<input type="text" class="form-control" id="teacher_username">
 							</div>
-
 							<div class="form-group">
 								<label for="pwd">Password:</label>
 								<input type="password" class="form-control" id="teacher_password">
 							</div>
-
 							<div class="btn btn-default" id="create_new_teacher_save">Create New</div>
-
-
 						</div>
-
-
 					</div>
-
-
 					<div id="manage_groups" class="container" style="display:none">
 						<div id="old_groups" class="col-xs-12">
 							<div>
 								<div class="col-xs-10">
-
 								</div>
 								<div class="col-xs-2">
 									<div class="btn btn-success" id="create_new_group">Create New Group</div>
@@ -142,98 +112,137 @@
 							</div>
 							<div class="col-xs-12">
 								<table id="old_group_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-
 									<thead>
-
-										<th>S.No.</th>
+										<th width="30px">S.No.</th>
 										<th>Group</th>
 										<th>Tutor Teacher</th>
-										
 									</thead>
 									<tbody id="old_group_line">
-										
 									</tbody>
-
 								</table>
-
 							</div>
 						</div>
 						<div class="col-xs-12" id="add_group_form">
 							<div class="col-xs-6">
-							
-							<div class="form-group ">
-								<label for="name">Group Name:</label>
-								<input type="text" class="form-control" id="group_name">
+								<div class="form-group ">
+									<label for="name">Group Name:</label>
+									<input type="text" class="form-control" id="group_name">
+								</div>
 							</div>
-							</div><div class="col-xs-6">
-							<div class="form-group ">
+							<div class="col-xs-6">
+								<div class="form-group ">
 									<label for="name">Select Tutor Teacher:</label>
-								<select  class="form-control" id="group_teacher">
-									
-								</select>
-							</div>
-							
+									<select class="form-control" id="group_teacher">
+									</select>
+								</div>
 							</div>
 							<div class="col-xs-6 col-offset-xs-6">
-									<div class="btn btn-default" id="create_new_group_save">Create New</div>
+								<div class="btn btn-default" id="create_new_group_save">Create New</div>
+							</div>
+						</div>
+					</div>
+					<div id="Analytics_teacher_group" class="container" style="display:none">
+						<div class="col-xs-10">
+							<div class="col-xs-6">
+								<div>Total Teachers:</div>
+								<div>Total Groups:</div>
+								<div>Total Teachers without Groups:</div>
+							</div>
+							<div class="col-xs-6">
+								<div id="total_teachers"></div>
+								<div id="total_groups"></div>
+								<div id="total_vaccant"></div>
+							</div>
+							<div class="col-xs-6">
+								<div>Vaccant Teachers:</div>
+							</div>
+							<div class="col-xs-6">
+								<div id="vaccant_teachers"></div>
+							</div>
+						</div>
+					</div>
+					<div id="manage_students" class="container" style="display:none">
+
+						<div id="old_students">
+							<div class="col-xs-6 ">
+								<div class="form-group ">
+									<label for="name">Select Group/Teacher:</label>
+									<select class="form-control" id="student_group_teacher">
+									</select>
+								</div>
+
+							</div>
+							<div class="col-xs-6 ">
+								<div class="form-group ">
+									<label for="name"></label>
+									<div class="student_btn">
+										<div class="btn  btn-info" id="view_students">View Students</div>
+										<div class="btn  btn-info" id="add_students">Add Students</div>
+									</div>
+								</div>
 							</div>
 
+						</div>
+						<div id="show_old_students" class="col-xs-12">
+							<table id="old_students_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+								<thead>
+									<th width="20px">S.No.</th>
+									<th>Student Name</th>
+									<th>Student Code</th>
+									<th>Student Group</th>
+									<th>Tutor Teacher</th>
+									<th>Email id</th>
+									<th>Enroll Date</th>
+									<th>Access Link</th>
+								</thead>
+								<tbody id="old_students_line">
+								</tbody>
+							</table>
+
+						</div>
+						<div id="create_new_students" class="col-xs-12">
+
+
+							<div class="input-group">
+								<span class="input-group-addon">First Name</span>
+								<input id="student_first_name" type="text" class="form-control" placeholder="First Name">
+								<span class="input-group-addon">Last Name</span>
+								<input id="student_last_name" type="text" class="form-control" placeholder="Last Name">
+
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Student's Code</span>
+								<input id="student_code" type="text" class="form-control" placeholder="T6XXXX">
+								<span class="input-group-addon">Student's Group</span>
+								<input id="student_group" type="text" class="form-control" disabled >
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Student's Email</span>
+								<input id="student_email" type="email" class="form-control" placeholder="Email">
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Access Link</span>
+								<input id="student_access_link" type="text" class="form-control" disabled value="Will be generated" >
+								
+								<span class="input-group-addon btn">Link</span>
+							</div>
+							<div class="input-group centered">
+									
+								<div class="btn btn-success" id="saveCurrentStudent">SAVE</div>
+							</div>
 							
 
-						
+
 
 
 						</div>
-
 					</div>
 
-					<div id="Analytics_teacher_group"  class="container" style="display:none">
-							<div class="col-xs-10">
-						
-								<div class="col-xs-6">
-								
-									<div>Total Teachers:</div>
-									<div>Total Groups:</div>
-									<div>Total Teachers without Groups:</div>
-								</div>
-								
-								<div class="col-xs-6">
-								
-									<div id="total_teachers"></div>
-									<div id="total_groups"></div>
-									<div id="total_vaccant"></div>
-								</div>
-								
-								<div class="col-xs-6">
-									<div>Vaccant Teachers</div>
-								
-								</div>
-								<div class="col-xs-6">
-									<div id="vaccant_teachers"></div>
-								
-								</div>
-						</div>
-					
-					
-					</div>
 
 				</div>
-
-
-
-
-
-
-
-
-
-
 			</div>
 		</div>
 	</div>
-
-
-		
 	<div class="modal fade" id="alert_popup" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -243,11 +252,9 @@
 					<h4 class="modal-title" id="alert_popup_title"></h4>
 				</div>
 				<div class="modal-body" id="alert_popup_content">
-
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
 				</div>
 			</div>
 		</div>

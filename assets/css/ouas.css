@@ -388,7 +388,7 @@
     background: linear-gradient(to right, rgba(255, 255, 255, 0.87) 0%, rgba(255, 255, 255, 0.87) 7%, rgba(255, 255, 255, 0.87) 17%, rgba(255, 255, 255, 0.87) 32%, rgba(255, 255, 255, 0.87) 33%, rgba(255, 255, 255, 0.87) 51%, rgba(255, 255, 255, 0.87) 54%, rgba(255, 255, 255, 0) 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#deffffff', endColorstr='#00ffffff', GradientType=1);
 }
-.belowbar {} .input-group-addon {
+.belowbar {} {
     border-radius: 0px !important;
 }
 .form-group,
@@ -518,9 +518,10 @@ body {
     background: #f2f2f2;
     font-family: "MeNfont", "Arial" !important;
     padding: 0px !important;
-    margin: 0px !important;
     font-size: 13px;
-    min-width: 500px
+    min-width: 500px;
+	margin:auto;
+	max-width: 1200px;
 }
 .mce-content-body{
      font-family: "MeNfont", "Arial" !important;
@@ -2896,7 +2897,7 @@ label {
     font-family: "Arial";
     padding: 5px !important;
 }
-.input-group-addoned {
+.input-group-addo {
     border-right: 0;
     min-width: 150px;
     text-align: left;
