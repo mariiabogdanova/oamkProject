@@ -11,7 +11,8 @@ $group_teacher=$_POST["group_teacher"];
 
 
 
-	$query = "INSERT INTO groups(group_name,group_teacher) VALUES ('$group_name','$group_teacher')";
+	$query = "INSERT INTO groups(group_name,group_tutor) VALUES ('$group_name','$group_teacher')";
+
 $result = mysql_query($query);	
 	if(!$result){
 		$output['RESULT'] = 'FAILED';     

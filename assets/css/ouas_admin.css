@@ -86,7 +86,7 @@
 .modal-backdrop {
     opacity: 0.7 !important;
 }
-#add_teacher,#manage_groups{
+#add_teacher,#manage_groups,#Analytics_teacher_group{
 	font-size: 10;
 	width:100%;
 }

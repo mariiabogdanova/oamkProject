@@ -13,6 +13,8 @@
 			case "GETOLDGROUPS" : require 'services/GetOldGroups.php';
 			break;
 			case "SAVEGROUPS" : require 'services/SaveGroups.php';
+			break;
+			case "TEACHER_GROUP_ANALYTICS" : require 'services/teacher_group_analytics.php';
 			break;	
             
 		}

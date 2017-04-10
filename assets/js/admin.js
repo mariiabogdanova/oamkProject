@@ -1,7 +1,7 @@
 var adminMenuArray = [{
 	group: "Manage Teachers",
 	items: ["Add Teacher", "Manage Groups", "Analytics"], //, "Remove Teacher"
-	fnct: ["add_teacher", "manage_groups", "Analytics"] //, "Remove Teacher"
+	fnct: ["add_teacher", "manage_groups", "Analytics_teacher_group"] //, "Remove Teacher"
 }, {
 	group: "Manage Students",
 	items: ["Add Students", "Assign Groups", "Analytics"],
@@ -88,10 +88,43 @@ function showContent(ref_id) {
 	if (ref_id == 'add_teacher') {
 		manager_teachers();
 	}
+	if (ref_id == 'Analytics_teacher_group') {
+		showAnalytics();
+	}
 
 
 }
+function showAnalytics(){
+	var request = getRequestObject({
 
+	}, "TEACHER_GROUP_ANALYTICS");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+
+				$('#total_teachers').html(result.DATA[0]["TOTAL_USER"]);
+				$('#total_groups').html(result.DATA[0]["TOTAL_GROUPS"]);
+				$('#total_vaccant').html(result.DATA[0]["VACANT_TEACHERS"].length);
+				var listofteacher="";
+			if(result.DATA[0]["VACANT_TEACHERS"].length==0){
+				
+				 listofteacher="None";
+			}
+			for(var count=0;count<result.DATA[0]["VACANT_TEACHERS"].length;count++){
+				
+				listofteacher+=result.DATA[0]["VACANT_TEACHERS"][count]["user_name"];
+			
+			}
+			$('#vaccant_teachers').html(listofteacher);
+		
+
+		} else {
+
+		}
+	}, "json");
+	
+	
+}
 function showLoading() {
 	$('.loading').show();
 }
@@ -221,7 +254,9 @@ function createNewTeacher() {
 
 
 // managing teacher ends here
-
+	$(document).on("click", "#create_new_group_save", function () {
+		saveNewGroup();
+	});
 function manage_groups() {
 
 
@@ -248,9 +283,7 @@ function manage_groups() {
 
 	});
 
-	$(document).on("click", "#create_new_group_save", function () {
-		saveNewGroup();
-	});
+
 
 
 
@@ -275,6 +308,7 @@ function getOldGroups() {
 
 
 			$('#old_groups').show();
+			$('#old_group_table').show();
 			fillGroupTable(result.DATA);
 
 		} else {
@@ -301,8 +335,8 @@ function fillGroupTable(data) {
 		var cols = "";
 		cols += '<td>' + (counter + 1) + '</td>';
 		cols += '<td>' + data[counter]["group_name"] + '</td>';
-		cols += '<td>' + data[counter]["group_teacher"] + '</td>';
-		cols += '<td></td>';
+		cols += '<td>' + data[counter]["user_name"] + '</td>';
+
 		cols += '</tr>';
 
 
@@ -331,6 +365,10 @@ function getListofTeachers() {
 			stopLoading();
 			if (result.RESULT == "SUCCESS") {
 				$('#group_name').val();
+				
+				$('#group_teacher')
+    .find('option')
+    .remove();
 				$('#group_teacher')
     .append('<option value="0">Please Select</option>');
 				for(var i=0;i<result.DATA.length;i++){
