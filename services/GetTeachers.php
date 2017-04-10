@@ -5,6 +5,8 @@
 
 
 $user_level=USER_ROLE_TEACHER;
+
+
 	$query = "select id,user_name,created_on from users where access_level=$user_level";
 $result = mysql_query($query);	
 	if(!$result){
