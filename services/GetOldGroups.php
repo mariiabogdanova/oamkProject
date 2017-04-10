@@ -7,7 +7,7 @@
 $user_level=USER_ROLE_TEACHER;
 
 
-	$query = "select id,user_name,created_on from users where access_level=$user_level";
+	$query = "SELECT a.*,b.user_name FROM `groups` a ,users b where a.group_tutor=b.id";
 $result = mysql_query($query);	
 	if(!$result){
 		$output['RESULT'] = 'FAILED';     
