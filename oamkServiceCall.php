@@ -21,6 +21,8 @@
 			case "SAVESTUDENT" : require 'services/SaveStudent.php';
 			break;
 			case "GETALLSTUDENTS" : require 'services/GetAllStudents.php';
+			break;
+			case "STUDENTANALYTICS" : require 'services/student_group_analytics.php';
 			break;	
             
 		}

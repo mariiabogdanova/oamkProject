@@ -87,7 +87,7 @@
 .modal-backdrop {
     opacity: 0.7 !important;
 }
-#add_teacher,#manage_groups,#Analytics_teacher_group,#manage_students{
+#add_teacher,#manage_groups,#Analytics_teacher_group,#manage_students,#Analytics_student{
 	font-size: 10;
 	width:100%;
 }
@@ -114,4 +114,7 @@ label{
 }
 .container{
 	max-width:1300px!important;
+}
+.highcharts-credits{
+	display: none!important;
 }

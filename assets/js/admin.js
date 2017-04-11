@@ -4,8 +4,8 @@ var adminMenuArray = [{
 	fnct: ["add_teacher", "manage_groups", "Analytics_teacher_group"] //, "Remove Teacher"
 }, {
 	group: "Manage Students",
-	items: ["Manage Students",  "Analytics"],//"Assign Groups",
-	fnct: ["manage_students", "Analytics"]//, "Assign Groups"
+	items: ["Manage Students", "Analytics"], //"Assign Groups",
+	fnct: ["manage_students", "Analytics_student"] //, "Assign Groups"
 }, {
 	group: "Manage News",
 	items: ["Add News", "Analytics"],
@@ -15,37 +15,26 @@ var adminMenuArray = [{
 	items: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"],
 	fnct: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"]
 }];
-var student_links=new Array();
+var student_links = new Array();
 function bodyLoaded() {
 	var bug_Test = false;
 	if (bug_Test == true) {
 		showLoggedInPage()
 	} else {
 		showLogin();
-		
 	}
 }
-
 function showLogin() {
-	
 	if (($.cookie('oamk_admin_userinfo') != null)) {
-         userLoginJsn = JSON.parse($.cookie('oamk_admin_userinfo'));
-         setUserToLoggedin(userLoginJsn.oamk_userid, userLoginJsn.oamk_username, userLoginJsn.oamk_useraccesstoken);
-     } else {
-
-	$('#login-page').show();
-	$('#logged-in-page').hide();
-	adminFunctions();
-     }
+		userLoginJsn = JSON.parse($.cookie('oamk_admin_userinfo'));
+		setUserToLoggedin(userLoginJsn.oamk_userid, userLoginJsn.oamk_username, userLoginJsn.oamk_useraccesstoken);
+	} else {
+		$('#login-page').show();
+		$('#logged-in-page').hide();
+		adminFunctions();
+	}
 }
-
 function adminFunctions() {
-	
-	
-	
-	
-	
-	
 	$(document).on("click", "#sign_in", function () {
 		doLogin();
 	});
@@ -53,24 +42,19 @@ function adminFunctions() {
 		doLogOut();
 	});
 }
-
 function doLogin() {
 	var username = $('#user_name').val();
 	var password = $('#password').val();
 	if (username != "" && password != "") {
-		
-		userLoginFunction(username,password);
-		
+		userLoginFunction(username, password);
 	} else {
-		showPop("Invalid","Enter proper username/password.");
+		showPop("Invalid", "Enter proper username/password.");
 	}
 }
-
 function doLogOut() {
 	setUserToLoggedOut();
 	//showLogin();
 }
-
 function showLoggedInPage() {
 	$('#login-page').hide();
 	$('#logged-in-page').show();
@@ -88,12 +72,10 @@ function showLoggedInPage() {
 		showContent($(this).attr("ref_id"));
 	});
 }
-
 function showContent(ref_id) {
 	$('.contentArea .container').hide();
 	//if(ref_id='add_teacher'){
 	$('#' + ref_id).show();
-
 	switch (ref_id) {
 		case "manage_groups":
 			manage_groups();
@@ -107,12 +89,11 @@ function showContent(ref_id) {
 		case "manage_students":
 			manangeStudents();
 			break;
+		case "Analytics_student":
+			studentAnalytics();
 		default:
-
 	}
-
 }
-
 function showAnalytics() {
 	var request = getRequestObject({}, "TEACHER_GROUP_ANALYTICS");
 	$.post(SERVER_URL, request, function (result) {
@@ -132,11 +113,9 @@ function showAnalytics() {
 		} else {}
 	}, "json");
 }
-
 function showLoading() {
 	$('.loading').show();
 }
-
 function stopLoading() {
 	$('.loading').fadeOut("slow");
 }
@@ -152,7 +131,6 @@ function getOldTeachers() {
 		} else {}
 	}, "json");
 }
-
 function fillTeacherTable(data) {
 	$('#old_teachers_line').empty()
 	for (counter = 0; counter < data.length; counter++) {
@@ -174,7 +152,6 @@ function fillTeacherTable(data) {
 	});
 	$('#old_teachers').show();
 }
-
 function manager_teachers() {
 	$('#create_new_teacher').show();;
 	$('#old_teachers').hide();
@@ -189,7 +166,6 @@ function manager_teachers() {
 		createNewTeacher();
 	});
 }
-
 function createNewTeacher() {
 	var teacher_username = $('#teacher_username').val();
 	var teacher_password = $('#teacher_password').val();
@@ -213,12 +189,10 @@ function createNewTeacher() {
 	}
 }
 // managing teacher ends here
-
 //manage group begins here
 $(document).on("click", "#create_new_group_save", function () {
 	saveNewGroup();
 });
-
 function manage_groups() {
 	$('#old_groups').show();
 	$('#old_group_table').hide();
@@ -229,7 +203,6 @@ function manage_groups() {
 		getListofTeachers();
 	});
 }
-
 function getOldGroups() {
 	showLoading();
 	var request = getRequestObject({}, "GETOLDGROUPS");
@@ -242,7 +215,6 @@ function getOldGroups() {
 		} else {}
 	}, "json");
 }
-
 function fillGroupTable(data) {
 	$('#old_group_line').empty()
 	for (counter = 0; counter < data.length; counter++) {
@@ -263,7 +235,6 @@ function fillGroupTable(data) {
 	});
 	$('#old_group_table').show();
 }
-
 function getListofTeachers() {
 	var request = getRequestObject({}, "GETTEACHERNAMES");
 	$.post(SERVER_URL, request, function (result) {
@@ -283,7 +254,6 @@ function getListofTeachers() {
 		}
 	}, "json");
 }
-
 function saveNewGroup() {
 	var group_name = $('#group_name').val();
 	var group_teacher = $('#group_teacher').val();
@@ -307,62 +277,78 @@ function saveNewGroup() {
 	}
 }
 //group code ends here
-
-
 //manage students starts here
-
 function showGroupError() {
 	showPop("Group Error!", "Group is not selected, please select the group.")
-
 }
-
-
 $(document).on("click", "#view_students", function () {
 	if ($('#student_group_teacher').val() != 0) {
 		$('#create_new_students').hide();
 		$('#show_old_students').show();
 		getStudents();
 	} else {
-
 		showGroupError();
 	}
-
 });
 $(document).on("click", "#saveCurrentStudent", function () {
 	saveCurrentStudent();
 });
-
+function checkFields(fname, lname, code, email, group) {
+	var missing = new Array;
+	if (fname.length == 0) {
+		missing.push("First Name");
+	}
+	if (lname.length == 0) {
+		missing.push("Last Name");
+	}
+	if (code.length == 0) {
+		missing.push("Student Code");
+	}
+	if (email.length == 0) {
+		missing.push("Email");
+	}
+	return missing;
+}
+function validateEmail(email) {
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
+}
 function saveCurrentStudent() {
 	var fname = $('#student_first_name').val();
 	var lname = $('#student_last_name').val();
 	var code = $('#student_code').val();
 	var email = $('#student_email').val();
 	var group = $('#student_group_teacher').val();
-	showLoading();
-	var request = getRequestObject({
-		fname: fname,
-		lname: lname,
-		code: code,
-		email: email,
-		group: group
-	}, "SAVESTUDENT");
-	$.post(SERVER_URL, request, function (result) {
-		stopLoading();
-		if (result.RESULT == "SUCCESS") {
-			showPop("New Student Added", "A new student with name " + fname + " has been added.");
-			$('#create_new_students').hide();
+	var checkCount = checkFields(fname, lname, code, email, group);
+	if (checkCount.length != 0) {
+		showPop("Incomplete!", "Please fill all the following,<br>" + checkCount.toString());
+	} else {
+		if (!validateEmail(email)) {
+			showPop("Invalid Email", "The provided email address is invalid.");
 		} else {
-			showPop("Failed", "Please try again!");
+			showLoading();
+			var request = getRequestObject({
+				fname: fname,
+				lname: lname,
+				code: code,
+				email: email,
+				group: group
+			}, "SAVESTUDENT");
+			$.post(SERVER_URL, request, function (result) {
+				stopLoading();
+				if (result.RESULT == "SUCCESS") {
+					showPop("New Student Added", "A new student with name " + fname + " has been added.");
+					$('#create_new_students').hide();
+				} else {
+					showPop("Failed", "Please try again!");
+				}
+			}, "json");
 		}
-	}, "json");
-
+	}
 }
-
 function getStudents() {
-
 	showLoading();
 	var request = getRequestObject({
-
 		group: $('#student_group_teacher').val()
 	}, "GETALLSTUDENTS");
 	$.post(SERVER_URL, request, function (result) {
@@ -374,7 +360,6 @@ function getStudents() {
 		} else {}
 	}, "json");
 }
-
 function fillStudentsTable(data) {
 	$('#old_students_line').empty();
 	for (counter = 0; counter < data.length; counter++) {
@@ -383,12 +368,12 @@ function fillStudentsTable(data) {
 		cols += '<td>' + (counter + 1) + '</td>';
 		cols += '<td>' + data[counter]["first_name"] + ' ' + data[counter]["last_name"] + '</td>';
 		cols += '<td>' + data[counter]["student_code"] + '</td>';
-		cols += '<td>' + data[counter]["group_id"] + '</td>';
-		cols += '<td>' + data[counter]["group_id"] + '</td>';
+		cols += '<td>' + data[counter]["group_name"] + '</td>';
+		cols += '<td>' + data[counter]["user_name"] + '</td>';
 		cols += '<td>' + data[counter]["email_id"] + '</td>';
 		cols += '<td>' + data[counter]["created_on"] + '</td>';
-		student_links[ data[counter]["id"]]=data[counter];
-		cols += '<td><div class="btn btn-xs btn-warning" onclick="showlink('+ data[counter]["id"]+');">Link</div></td>';
+		student_links[data[counter]["id"]] = data[counter];
+		cols += '<td><div class="btn btn-xs btn-warning" onclick="showlink(' + data[counter]["id"] + ');">Link</div></td>';
 		cols += '</tr>';
 		newRow.append(cols);
 		$('#old_students_line').append(newRow);
@@ -401,26 +386,21 @@ function fillStudentsTable(data) {
 	});
 	$('#old_group_table').show();
 }
-function showlink(ref){
-	var title="Students Specific Linker";
-	var body='<a href="../students/student_view.html?access_token='+student_links[ref]["access_code"]+'" class="btn btn-xs btn-info" target="_blank">Link</a>';
-	showPop(title,body);
+function showlink(ref) {
+	var title = "Students Specific Linker";
+	var body = '<a href="../students/student_view.html?access_token=' + student_links[ref]["access_code"] + '" class="btn btn-xs btn-info" target="_blank">Link</a>';
+	showPop(title, body);
 }
 $(document).on("click", "#add_students", function () {
 	if ($('#student_group_teacher').val() != 0) {
 		$('#show_old_students').hide();
-
 		$('#create_new_students input').val('');
 		$('#student_group').val($('#student_group_teacher').val());
 		$('#create_new_students').show();
-
 	} else {
-
 		showGroupError();
 	}
-
 });
-
 function manangeStudents() {
 	getGroupTeachers();
 	$('#show_old_students').hide();
@@ -430,7 +410,6 @@ function manangeStudents() {
 	//view_students
 	//add_students
 }
-
 function getGroupTeachers() {
 	var request = getRequestObject({}, "GETGROUPANDTEACHER");
 	$.post(SERVER_URL, request, function (result) {
@@ -449,9 +428,6 @@ function getGroupTeachers() {
 			$('#add_group_form').show();
 		}
 	}, "json");
-
-
-
 }
 //manage students ends here
 function showPop(title, body) {
@@ -459,15 +435,94 @@ function showPop(title, body) {
 	$('#alert_popup_content').html(body);
 	$('#alert_popup').modal();
 }
-
 function create_groups() {
 	$('#create_group_form').show();
 }
-
 function remove_group() {
 	$('#remove_group_form').show();
 }
-
 function edit_groups() {
 	$('#edit_groups_form').show();
 }
+
+function studentAnalytics(){
+	
+	
+	
+	showLoading();
+	var request = getRequestObject({
+		}, "STUDENTANALYTICS");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+				
+				drawChart(result.DATA);
+		
+		} else {}
+	}, "json");
+	
+	
+	
+
+
+}
+
+    function drawChart(DATA) {
+		
+		var GROUPS = [];
+         var STUDENTS = [];
+         for (counter = 0; counter < DATA.length; counter++) {
+             //var d = totaldata[counter]["game_play_date_time"];
+            STUDENTS.push(Number(DATA[counter]["STUDENTS"]));
+              GROUPS.push((DATA[counter]["GROUPNAME"]));
+         }
+
+  
+		 $(function () {
+             $('#myPieChart').highcharts({
+                 chart: {
+                     type: 'column'
+                 },
+                 title: {
+                     text: 'Students / Group Analytics'
+                 },
+                 subtitle: {
+                     text: 'Total students in a group'
+                 },
+                 xAxis: {
+                     categories: GROUPS,
+                     labels: {
+                         rotation: -45,
+                         style: {
+                             fontSize: '13px',
+                             fontFamily: 'Verdana, sans-serif'
+                         }
+                     }
+                 },
+                 yAxis: {
+                     min: 0,
+                     title: {
+                         text: 'Total Number of Students'
+                     }
+                 },
+                 tooltip: {
+                     headerFormat: '<span style="font-size:10px">{point.x}</span><table>',
+                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                         '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+                     footerFormat: '</table>',
+                     shared: true,
+                     useHTML: true
+                 },
+                 plotOptions: {
+                     column: {
+                         pointPadding: 0.2,
+                         borderWidth: 0
+                     }
+                 },
+                 series: [{
+                     name: 'Number of Students',
+                     data: STUDENTS
+                 }]
+             });
+         });
+    }

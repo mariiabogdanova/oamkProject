@@ -2,10 +2,10 @@
 	define( 'parentFile' , 1 ); 
 	require_once( 'db_include.php' );	
 	$user_level=USER_ROLE_TEACHER;
-	
 
 
-	$query = "SELECT count(b.id) as total_users ,count(a.id) as total_groups from users b, groups a where b.access_level=$user_level";
+$query = "SELECT ( select count(b.id) from users b where b.access_level=$user_level) as total_users, (select count(a.id) from groups a) as total_groups";
+
 	$result = mysql_query($query);	
 	if(!$result){
 		$output['RESULT'] = 'FAILED';     

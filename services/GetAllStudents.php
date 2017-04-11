@@ -6,7 +6,7 @@
 $group=$_POST["group"];
 
 
-	$query = "SELECT * from students where group_id='$group'";
+	$query = "SELECT a.*,b.group_name,c.user_name FROM `students` a, users c, groups b where a.group_id='$group' and a.group_id=b.id and b.group_tutor=c.id";
 $result = mysql_query($query);	
 	if(!$result){
 		$output['RESULT'] = 'FAILED';     
