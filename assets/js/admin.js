@@ -16,6 +16,7 @@ var adminMenuArray = [{
 	fnct: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"]
 }];
 var student_links = new Array();
+
 function bodyLoaded() {
 	var bug_Test = false;
 	if (bug_Test == true) {
@@ -24,6 +25,7 @@ function bodyLoaded() {
 		showLogin();
 	}
 }
+
 function showLogin() {
 	if (($.cookie('oamk_admin_userinfo') != null)) {
 		userLoginJsn = JSON.parse($.cookie('oamk_admin_userinfo'));
@@ -34,6 +36,7 @@ function showLogin() {
 		adminFunctions();
 	}
 }
+
 function adminFunctions() {
 	$(document).on("click", "#sign_in", function () {
 		doLogin();
@@ -42,6 +45,7 @@ function adminFunctions() {
 		doLogOut();
 	});
 }
+
 function doLogin() {
 	var username = $('#user_name').val();
 	var password = $('#password').val();
@@ -51,10 +55,12 @@ function doLogin() {
 		showPop("Invalid", "Enter proper username/password.");
 	}
 }
+
 function doLogOut() {
 	setUserToLoggedOut();
 	//showLogin();
 }
+
 function showLoggedInPage() {
 	$('#login-page').hide();
 	$('#logged-in-page').show();
@@ -72,6 +78,7 @@ function showLoggedInPage() {
 		showContent($(this).attr("ref_id"));
 	});
 }
+
 function showContent(ref_id) {
 	$('.contentArea .container').hide();
 	//if(ref_id='add_teacher'){
@@ -94,6 +101,7 @@ function showContent(ref_id) {
 		default:
 	}
 }
+
 function showAnalytics() {
 	var request = getRequestObject({}, "TEACHER_GROUP_ANALYTICS");
 	$.post(SERVER_URL, request, function (result) {
@@ -113,9 +121,11 @@ function showAnalytics() {
 		} else {}
 	}, "json");
 }
+
 function showLoading() {
 	$('.loading').show();
 }
+
 function stopLoading() {
 	$('.loading').fadeOut("slow");
 }
@@ -131,6 +141,7 @@ function getOldTeachers() {
 		} else {}
 	}, "json");
 }
+
 function fillTeacherTable(data) {
 	$('#old_teachers_line').empty()
 	for (counter = 0; counter < data.length; counter++) {
@@ -152,6 +163,7 @@ function fillTeacherTable(data) {
 	});
 	$('#old_teachers').show();
 }
+
 function manager_teachers() {
 	$('#create_new_teacher').show();;
 	$('#old_teachers').hide();
@@ -166,6 +178,7 @@ function manager_teachers() {
 		createNewTeacher();
 	});
 }
+
 function createNewTeacher() {
 	var teacher_username = $('#teacher_username').val();
 	var teacher_password = $('#teacher_password').val();
@@ -193,6 +206,7 @@ function createNewTeacher() {
 $(document).on("click", "#create_new_group_save", function () {
 	saveNewGroup();
 });
+
 function manage_groups() {
 	$('#old_groups').show();
 	$('#old_group_table').hide();
@@ -203,6 +217,7 @@ function manage_groups() {
 		getListofTeachers();
 	});
 }
+
 function getOldGroups() {
 	showLoading();
 	var request = getRequestObject({}, "GETOLDGROUPS");
@@ -215,6 +230,7 @@ function getOldGroups() {
 		} else {}
 	}, "json");
 }
+
 function fillGroupTable(data) {
 	$('#old_group_line').empty()
 	for (counter = 0; counter < data.length; counter++) {
@@ -235,6 +251,7 @@ function fillGroupTable(data) {
 	});
 	$('#old_group_table').show();
 }
+
 function getListofTeachers() {
 	var request = getRequestObject({}, "GETTEACHERNAMES");
 	$.post(SERVER_URL, request, function (result) {
@@ -254,6 +271,7 @@ function getListofTeachers() {
 		}
 	}, "json");
 }
+
 function saveNewGroup() {
 	var group_name = $('#group_name').val();
 	var group_teacher = $('#group_teacher').val();
@@ -293,6 +311,7 @@ $(document).on("click", "#view_students", function () {
 $(document).on("click", "#saveCurrentStudent", function () {
 	saveCurrentStudent();
 });
+
 function checkFields(fname, lname, code, email, group) {
 	var missing = new Array;
 	if (fname.length == 0) {
@@ -309,10 +328,12 @@ function checkFields(fname, lname, code, email, group) {
 	}
 	return missing;
 }
+
 function validateEmail(email) {
 	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(email);
 }
+
 function saveCurrentStudent() {
 	var fname = $('#student_first_name').val();
 	var lname = $('#student_last_name').val();
@@ -346,6 +367,7 @@ function saveCurrentStudent() {
 		}
 	}
 }
+
 function getStudents() {
 	showLoading();
 	var request = getRequestObject({
@@ -360,6 +382,7 @@ function getStudents() {
 		} else {}
 	}, "json");
 }
+
 function fillStudentsTable(data) {
 	$('#old_students_line').empty();
 	for (counter = 0; counter < data.length; counter++) {
@@ -386,6 +409,7 @@ function fillStudentsTable(data) {
 	});
 	$('#old_group_table').show();
 }
+
 function showlink(ref) {
 	var title = "Students Specific Linker";
 	var body = '<a href="../students/student_view.html?access_token=' + student_links[ref]["access_code"] + '" class="btn btn-xs btn-info" target="_blank">Link</a>';
@@ -401,6 +425,7 @@ $(document).on("click", "#add_students", function () {
 		showGroupError();
 	}
 });
+
 function manangeStudents() {
 	getGroupTeachers();
 	$('#show_old_students').hide();
@@ -410,6 +435,7 @@ function manangeStudents() {
 	//view_students
 	//add_students
 }
+
 function getGroupTeachers() {
 	var request = getRequestObject({}, "GETGROUPANDTEACHER");
 	$.post(SERVER_URL, request, function (result) {
@@ -435,94 +461,95 @@ function showPop(title, body) {
 	$('#alert_popup_content').html(body);
 	$('#alert_popup').modal();
 }
+
 function create_groups() {
 	$('#create_group_form').show();
 }
+
 function remove_group() {
 	$('#remove_group_form').show();
 }
+
 function edit_groups() {
 	$('#edit_groups_form').show();
 }
 
-function studentAnalytics(){
-	
-	
-	
+function studentAnalytics() {
+
+
+
 	showLoading();
-	var request = getRequestObject({
-		}, "STUDENTANALYTICS");
+	var request = getRequestObject({}, "STUDENTANALYTICS");
 	$.post(SERVER_URL, request, function (result) {
 		stopLoading();
 		if (result.RESULT == "SUCCESS") {
-				
-				drawChart(result.DATA);
-		
+
+			drawChart(result.DATA);
+
 		} else {}
 	}, "json");
-	
-	
-	
+
+
+
 
 
 }
 
-    function drawChart(DATA) {
-		
-		var GROUPS = [];
-         var STUDENTS = [];
-         for (counter = 0; counter < DATA.length; counter++) {
-             //var d = totaldata[counter]["game_play_date_time"];
-            STUDENTS.push(Number(DATA[counter]["STUDENTS"]));
-              GROUPS.push((DATA[counter]["GROUPNAME"]));
-         }
+function drawChart(DATA) {
 
-  
-		 $(function () {
-             $('#myPieChart').highcharts({
-                 chart: {
-                     type: 'column'
-                 },
-                 title: {
-                     text: 'Students / Group Analytics'
-                 },
-                 subtitle: {
-                     text: 'Total students in a group'
-                 },
-                 xAxis: {
-                     categories: GROUPS,
-                     labels: {
-                         rotation: -45,
-                         style: {
-                             fontSize: '13px',
-                             fontFamily: 'Verdana, sans-serif'
-                         }
-                     }
-                 },
-                 yAxis: {
-                     min: 0,
-                     title: {
-                         text: 'Total Number of Students'
-                     }
-                 },
-                 tooltip: {
-                     headerFormat: '<span style="font-size:10px">{point.x}</span><table>',
-                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                         '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
-                     footerFormat: '</table>',
-                     shared: true,
-                     useHTML: true
-                 },
-                 plotOptions: {
-                     column: {
-                         pointPadding: 0.2,
-                         borderWidth: 0
-                     }
-                 },
-                 series: [{
-                     name: 'Number of Students',
-                     data: STUDENTS
-                 }]
-             });
-         });
-    }
+	var GROUPS = [];
+	var STUDENTS = [];
+	for (counter = 0; counter < DATA.length; counter++) {
+		STUDENTS.push(Number(DATA[counter]["STUDENTS"]));
+		GROUPS.push((DATA[counter]["GROUPNAME"]));
+	}
+
+
+	$(function () {
+		$('#myPieChart').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Students / Group Analytics'
+			},
+			subtitle: {
+				text: 'Total students in a group'
+			},
+			xAxis: {
+				categories: GROUPS,
+				labels: {
+					rotation: -45,
+					style: {
+						fontSize: '13px',
+						fontFamily: 'Verdana, sans-serif'
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: 'Total Number of Students'
+				}
+			},
+			tooltip: {
+				headerFormat: '<span style="font-size:10px">{point.x}</span><table>',
+				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+					'<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+				footerFormat: '</table>',
+				shared: true,
+				useHTML: true
+			},
+			plotOptions: {
+				column: {
+					pointPadding: 0.2,
+					borderWidth: 0
+				}
+			},
+			series: [{
+				name: 'Number of Students',
+				data: STUDENTS
+            }]
+		});
+	});
+}
