@@ -245,8 +245,62 @@
 
 						</div>
 					</div>
+					<div id="manage_news" class="container" style="display:none">
+							<div id="old_news" class="col-xs-12">
+							<div>
+								<div class="col-xs-10">
+								</div>
+								<div class="col-xs-2">
+									<div class="btn btn-success" id="create_new_news">Create News</div>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<table id="old_news_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+									<thead>
+										<th width="30px">S.No.</th>
+										<th>Title</th>
+										<th>Image</th>
+										<th>Body</th>
+										<th>Date</th>
+									</thead>
+									<tbody id="old_news_line">
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-xs-12" id="add_news_form">
+								<div class="input-group">
+								<span class="input-group-addon">News Title</span>
+								<input id="news_title" type="text" class="form-control" placeholder="First Name">
+								
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">News Body</span>
+							
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Student's Email</span>
+								<input id="student_email" type="email" class="form-control" placeholder="Email">
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">Access Link</span>
+								<input id="student_access_link" type="text" class="form-control" disabled value="Will be generated">
 
+								<span class="input-group-addon btn">Link</span>
+							</div>
+							<div class="input-group centered">
 
+								<div class="btn btn-success" id="saveCurrentStudent">SAVE</div>
+							</div>
+						</div>
+					
+					</div>
+					<div id="news_analytics" class="container" style="display:none">
+					
+					<div id="newsAnalytics">
+
+							</div>
+					</div>
 				</div>
 			</div>
 		</div>
