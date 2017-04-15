@@ -32,7 +32,7 @@
 			break; 	
 			case "getNews" : require 'services/GetAllNews.php';
 			break; 
-			//teacherCalls
+			//teacherCalls begins here
 			case "TEACHERLOGIN" : require 'services/TEACHERLOGIN.php';
 			break;
 			case "SAVETEACHERINFO" : require 'services/TEACHERLOGIN.php';
