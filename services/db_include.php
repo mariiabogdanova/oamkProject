@@ -6,11 +6,9 @@ $PRE_STAGE_SITE=false;
 if($LIVE_SITE==true)
 { 
 }else if($PRE_STAGE_SITE==true){
-
 }
 else if($STAGE_SITE==true)
 {
-
 }
 else if($LOCAL_SITE==true)
 {
@@ -28,5 +26,4 @@ define( "SMTP_ACCOUNT", "" );
 define( "SMTP_PASSWORD", "");	
 $mysql = @mysql_connect(DATABASE_SERVER, DATABASE_USERNAME, DATABASE_PASSWORD) or die(mysql_error());
 mysql_select_db( DATABASE_NAME );
-require_once( 'common.php' );
 ?>

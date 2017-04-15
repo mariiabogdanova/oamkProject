@@ -23,10 +23,16 @@
 			case "GETALLSTUDENTS" : require 'services/GetAllStudents.php';
 			break;
 			case "STUDENTANALYTICS" : require 'services/student_group_analytics.php';
-			break;	
-            
+			break;
+			case "uploadLogo_simple" : require 'services/upload_image.php';
+			break; 
+			case "getImages" : require 'services/get_images.php';
+			break; 
+			case "saveNews" : require 'services/saveNews.php';
+			break; 	
+			case "getNews" : require 'services/GetAllNews.php';
+			break; 
 		}
-	    
 	} catch (Exception $exception) {
 	    echo '<error>An exception occured while calling the service.</error>';
 	    exit(1);

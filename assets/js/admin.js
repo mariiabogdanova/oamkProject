@@ -9,14 +9,14 @@ var adminMenuArray = [{
 }, {
 	group: "Manage News",
 	items: ["Add News", "Analytics"],
-	fnct: ["Add News", "Analytics"],
+	fnct: ["Add_News", "Analytics"],
 }, {
 	group: "Analytics",
 	items: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"],
 	fnct: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"]
 }];
 var student_links = new Array();
-
+var imageSelected="";
 function bodyLoaded() {
 	var bug_Test = false;
 	if (bug_Test == true) {
@@ -98,10 +98,231 @@ function showContent(ref_id) {
 			break;
 		case "Analytics_student":
 			studentAnalytics();
+			break;
+
+		case "Analytics_student":
+			studentAnalytics();
+			break;
+
+		case "Add_News":
+			manageNews();
+			break;
 		default:
 	}
 }
+//manage news here
 
+function manageNews() {
+getOldNews();
+	$('#manage_news').show();
+	$('#old_news').show();
+	$('#add_news_form').hide();
+	$('#add_news_form input').val('');
+
+
+}
+
+$(document).on("click", "#create_new_news", function () {
+	createNewNews();
+});
+
+$(document).on("click", "#image_Selector", function () {
+	getImageGallery();
+});
+
+function createNewNews() {
+
+	$('#add_news_form').show();
+	$('#add_news_form input').val('');
+}
+function getImageGallery(){
+	getImages();
+	$('#imageUploader').modal();
+}
+function getImages(){
+	showLoading();
+	var request = getRequestObject({}, "getImages");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			
+			showimages(result.MSG);
+		} else {}
+	}, "json");
+}
+
+function showimages(data) {
+     
+    $('#existingImages').empty();
+    for (i = 0; i < data.length; i++) {
+        var newRow = $("<tr>");
+        var cols = "";
+        var delbtn = data[i]["name"].replace(".", "_");
+        cols += '<td style="padding: 4px;border: 0px none;"><div class="col-xs-3"><a class="featuredimages" fname="' + data[i]["name"] + '"><img src=".' + data[i]["path"] + '" width="80px" height="48px" style="border:1px solid #000;padding:1px"></a></div><div class="col-xs-6" style="padding-top: 10px;"> ' + data[i]["name"] + '</div></td>';
+        
+        newRow.append(cols);
+        $('#existingImages').append(newRow);
+    }
+    $('.featuredimages').click(function () {
+
+        var filename = $(this).attr("fname");
+        $('.featuredimages img').css("border", "0px solid red");
+        $(this).find("img").css("border", "3px solid red");
+		
+        imageSelected = filename;
+
+    });
+  
+    
+}
+
+
+
+
+
+
+$(document).on("click", "#uploader_apply", function () {
+	$('#selected_image').html('<img src="../assets/news_images/' + imageSelected + '" style="width:100px;height:100px"/>');
+$('#news_image').val(imageSelected);
+	$('#imageUploader').modal('hide');
+
+});
+
+$(document).on("click", "#uploader_closer", function () {
+	$('#selected_image').html('');
+$('#news_image').val();
+
+});
+
+
+$(document).on("click", "#saveCurrentNews", function () {
+	
+	
+var title=$('#news_title').val();
+var body=$('#news_body').val();
+var image=$('#news_image').val();
+	
+	if(title.length==0 || body.length==0 || image.length==0)
+		{
+			showPop("News Error","Please provide title, body and image for the news.");
+			
+		}
+	else{
+		var request = getRequestObject({
+			title:title,
+			body:body,
+			image:image
+		}, "saveNews");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			
+				showPop("Content Saved!","News has been added.");
+			$('#news_title').val('');
+			$('#news_body').val('');
+			$('#news_image').val('');
+			getOldNews();
+		} 
+	}, "json");
+		
+	}
+	
+});
+
+function getOldNews(){
+	
+	$('#add_news_form').hide();
+	$('#add_news_form input').val('');
+	
+		showLoading();
+	var request = getRequestObject({}, "getNews");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			
+			showOldNews(result.DATA);
+		} else {}
+	}, "json");
+}
+function showOldNews(data){
+
+	$('#old_news_line').empty()
+	for (counter = 0; counter < data.length; counter++) {
+		var newRow = $('<tr style="font-size:11px">');
+		var cols = "";
+		cols += '<td>' + (counter + 1) + '</td>';
+		cols += '<td>' + data[counter]["content_title"] + '</td>';
+		cols += '<td><img src="../assets/news_images/' + data[counter]["content_photo"] + '" style="width:100px;height:100px"/></td>';
+		cols += '<td>' + data[counter]["content_description"] + '</td>';
+		cols += '<td>' + data[counter]["date"] + '</td>';
+	
+		cols += '</tr>';
+		newRow.append(cols);
+		$('#old_news_line').append(newRow);
+	}
+	var oTable = $("#old_news_table").dataTable({
+		"bSort": true,
+		"bRetrieve": true,
+		"bProcessing": true,
+		"bDestroy": true
+	});
+	$('#old_news_table').show();
+	
+}
+var _validLogoExtensions = [".jpg",".jpeg",".png"];
+var locationforimage = "";
+function ImageValidate(input_Form) {
+    $('.loading').show();
+    var arrInputs = document.getElementsByClassName("uploadLogo");
+    for (var i = 0; i < arrInputs.length; i++) {
+        var oInput = arrInputs[i];
+        if (oInput.type == "file") {
+            var sFileName = oInput.value;
+            if (sFileName.length > 0) {
+                var Validity = false;
+                for (var j = 0; j < _validLogoExtensions.length; j++) {
+                    var sCurExtension = _validLogoExtensions[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                        Validity = true;
+
+                        $("#uid_simple").val(userLoginJsn.oamk_userid);
+                        $("#atoken_simple").val(userLoginJsn.oamk_useraccesstoken);
+                        $("#infoid_simple").val(Math.random() * 10000000000000000 + 1);
+                        $("#typehere_simple").val(locationforimage);
+                        $("#uploadLogo_simple").submit();
+						
+                        break;
+                    }
+                }
+                if (!Validity) {
+                    $('.loading').hide();
+                    loadedlogos("Error", "You are submitting a file type that is not allowed.  The permitted file types are: .jpg,.jpeg,.png");
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+function loadedlogos(title, msg) {
+    $('.loading').hide();
+    showPop(title, msg);
+
+getImages();
+    
+
+}
+
+
+function afterLogoUpload(name, location) //filename to show after upload
+{
+    $('.loading').hide();
+   getImages();
+}
+
+
+//manage news ends
 function showAnalytics() {
 	var request = getRequestObject({}, "TEACHER_GROUP_ANALYTICS");
 	$.post(SERVER_URL, request, function (result) {
@@ -174,10 +395,11 @@ function manager_teachers() {
 		$('#teacher_password').val('');
 		$('#add_techer_form').show();
 	});
-	$(document).on("click", "#create_new_teacher_save", function () {
-		createNewTeacher();
-	});
+
 }
+$(document).on("click", "#create_new_teacher_save", function () {
+	createNewTeacher();
+});
 
 function createNewTeacher() {
 	var teacher_username = $('#teacher_username').val();

@@ -87,7 +87,7 @@
 .modal-backdrop {
     opacity: 0.7 !important;
 }
-#add_teacher,#manage_groups,#Analytics_teacher_group,#manage_students,#Analytics_student{
+#add_teacher,#manage_groups,#Analytics_teacher_group,#manage_students,#Analytics_student,#manage_news{
 	font-size: 10;
 	width:100%;
 }
