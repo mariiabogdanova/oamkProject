@@ -309,9 +309,8 @@
     background-color: #fff !important;
     border-color: white !important;
     color: #F47B29 !important;
-    border-left: 2px solid #F47B29!important;
-    border-right: 2px solid #F47B29!important;
-    border-top: 1px solid white!important;
+    border-top: 2px solid #F47B29!important;
+  
     -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .125);
     */ box-shadow: inset 0 0px 0px rgba(0, 0, 0, .125);
 }
@@ -2857,7 +2856,7 @@ label {
     margin-right: 10%;
 }
 #settings_checker {
-    font-size: 12px;
+    font-size: 17px;
 }
 .input-group-addon {
     min-width: 150px;

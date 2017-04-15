@@ -38,6 +38,7 @@ function showLogin() {
 }
 
 function adminFunctions() {
+	
 	$(document).on("click", "#sign_in", function () {
 		doLogin();
 	});

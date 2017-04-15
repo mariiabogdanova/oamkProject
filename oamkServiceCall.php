@@ -3,8 +3,8 @@
 	try {
 		switch( $appservice ) {			
 			case "USERLOGIN" : require 'services/UserLogin.php';
-			break;	
-            case "CREATENEWUSER" : require 'services/CreateUser.php';
+			break;
+			case "CREATENEWUSER" : require 'services/CreateUser.php';
 			break; 
 			case "GETTEACHERS" : require 'services/GetTeachers.php';
 			break;
@@ -32,6 +32,11 @@
 			break; 	
 			case "getNews" : require 'services/GetAllNews.php';
 			break; 
+			//teacherCalls
+			case "TEACHERLOGIN" : require 'services/TEACHERLOGIN.php';
+			break;
+			case "SAVETEACHERINFO" : require 'services/TEACHERLOGIN.php';
+			break;
 		}
 	} catch (Exception $exception) {
 	    echo '<error>An exception occured while calling the service.</error>';
