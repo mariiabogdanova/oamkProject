@@ -294,6 +294,64 @@
 						</div>
 					
 					</div>
+					
+					
+					
+					
+					<div id="Add_polls" class="container" style="display:none">
+							<div id="old_polls" class="col-xs-12">
+							<div>
+								<div class="col-xs-10">
+								</div>
+								<div class="col-xs-2">
+									<div class="btn btn-success" id="create_new_poll">Create News</div>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<table id="old_poll_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+									<thead>
+										<th width="30px">S.No.</th>
+										<th>Poll Questions</th>
+										<th>Poll Options</th>
+										<th>Date</th>
+									</thead>
+									<tbody id="old_poll_line">
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-xs-12" id="add_poll_form">
+								
+                        <div class="input-group input-group-lg">
+
+                            <span class="input-group-addon"> Question<span style="color:red">*</span></span>
+
+                            <input id="poll_title_input" class="form-control" placeholder="Title" type="text">
+                            <input id="poll_ref_id" class="form-control" type="hidden">
+
+                        </div>
+                        
+                        <div class="input-group input-group-lg" style="margin-top: 5px;">
+
+                            <span class="input-group-addon">Options<span style="color:red">*</span></span>
+                            <div id="option_inputs"></div>
+                      
+                       
+
+                        </div>
+                       
+
+                        <div class="input-group input-group-lg pull-right" style="margin-top: 5px;">
+                              <button type="button" class="btn btn-info" id="addoptions" style="margin-right:5px;width:100px">Add options</button>    
+                            <button type="button" class="btn btn-success" id="savepollsettings"   style="margin-right:5px;width:100px" >Save</button>
+                          
+
+                        
+                    </div>
+						</div>
+					
+					</div>
+					
 					<div id="news_analytics" class="container" style="display:none">
 					
 					<div id="newsAnalytics">

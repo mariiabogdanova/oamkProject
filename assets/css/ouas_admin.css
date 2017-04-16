@@ -87,7 +87,7 @@
 .modal-backdrop {
     opacity: 0.7 !important;
 }
-#add_teacher,#manage_groups,#Analytics_teacher_group,#manage_students,#Analytics_student,#manage_news{
+#add_teacher,#manage_groups,#Analytics_teacher_group,#manage_students,#Analytics_student,#manage_news,#Add_polls{
 	font-size: 10;
 	width:100%;
 }
@@ -117,4 +117,20 @@ label{
 }
 .highcharts-credits{
 	display: none!important;
+}
+
+.contactTitle{
+	color: black;
+    font-weight: bold;
+}
+.contactInfo{
+	color: grey;
+    font-weight: bold;
+}
+#contact_information_here{
+	
+	    min-height: 100px;
+    background-color: white;
+    text-align: left;
+    padding: 20px;
 }

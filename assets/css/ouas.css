@@ -431,7 +431,7 @@
 .sections div {
     margin: auto;
 }
-.sections #settings_checker div {
+.sections #settings_checker div,#group_details div{
     margin-bottom: 5px;
 }
 .textsections span,
@@ -2851,12 +2851,12 @@ label {
     padding: 2px!important;
     width: 80%!important;
 }
-#settings_checker input {
+#settings_checker input,#group_details input {
     float: right;
     margin-right: 10%;
 }
-#settings_checker {
-    font-size: 17px;
+#settings_checker,#group_details {
+    font-size: 15px;
 }
 .input-group-addon {
     min-width: 150px;

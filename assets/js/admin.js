@@ -7,9 +7,9 @@ var adminMenuArray = [{
 	items: ["Manage Students", "Analytics"], //"Assign Groups",
 	fnct: ["manage_students", "Analytics_student"] //, "Assign Groups"
 }, {
-	group: "Manage News",
-	items: ["Add News", "Analytics"],
-	fnct: ["Add_News", "Analytics"],
+	group: "Manage News/Polls",
+	items: ["Manange News", "Manage Polls"],
+	fnct: ["Add_News", "Add_polls"],
 }, {
 	group: "Analytics",
 	items: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"],
@@ -107,6 +107,9 @@ function showContent(ref_id) {
 
 		case "Add_News":
 			manageNews();
+			break;
+		case "Add_polls":
+			managePolls();
 			break;
 		default:
 	}
@@ -776,3 +779,113 @@ function drawChart(DATA) {
 		});
 	});
 }
+// adding polls
+function managePolls(){
+	getpolls();
+$('#old_polls').show();
+$('#add_poll_form').hide();
+
+
+}
+var numerofoptions = 0;
+
+$(document).on("click", "#create_new_poll", function () {
+	
+	
+$('#poll_title_input').val('');
+    $('#poll_ref_id').val('NEW');
+    var inputs = $('#option_inputs').empty();
+    inputs.append('<input  class="form-control" placeholder="Option 1" type="text" name="options[' + 0 + ']" value="" /><br> ');
+    inputs.append('<input  class="form-control"  placeholder="Option 2" type="text" name="options[' + 1 + ']" value="" /><br> ');
+    numerofoptions = 3;
+	$('#add_poll_form').show();
+});
+$('#addoptions').click(function () {
+
+    if (numerofoptions > 5) {
+        showPop("Option Limit Exceeded", "A poll can have up to 5 options.");
+
+    } else {
+        var inputs = $('#option_inputs');
+        current_numer = numerofoptions - 1;
+
+        inputs.append('<input  class="form-control"  placeholder="Option ' + numerofoptions + '" type="text" name="options[' + current_numer + ']" value="" /><br> ');
+        numerofoptions++;
+
+    }
+
+
+});
+
+$('#savepollsettings').click(function () {
+    var poll_title = $('#poll_title_input').val();
+    var ref_id = $('#poll_ref_id').val();
+    var options = new Array();
+    $("[name^='options']").each(function () {
+
+        options.push($(this).val());
+    });
+  
+    var request = getRequestObject({
+        poll_title: poll_title,
+        ref_id: ref_id,
+        options: options,
+
+    }, "SAVE_POLL_SETTINGS");
+    $.post(SERVER_URL, request, function (result) {
+        if (result.RESULT == "SUCCESS") {
+			showPop("Poll Added","Poll has been added.");
+			$('#add_poll_form').hide();
+
+           getpolls();
+
+        } 
+    }, "json");
+});
+
+function getpolls(){
+	var request = getRequestObject({
+    }, "GETPOLLS");
+    $.post(SERVER_URL, request, function (result) {
+        if (result.RESULT == "SUCCESS") {
+			
+				showPolls(result.DATA);
+          // getpolls();
+
+        } 
+    }, "json");
+	
+}
+function showPolls(data){
+	
+
+	$('#old_poll_line').empty();
+	for (counter = 0; counter < data.length; counter++) {
+		var newRow = $('<tr style="font-size:11px">');
+		var cols = "";
+		cols += '<td>' + (counter + 1) + '</td>';
+		cols += '<td>' + data[counter]["poll_title"] + '</td>';
+		cols += '<td>';
+		for(count=0;count<data[counter]["options"].length;count++){
+			cols+='<div>'+(count + 1)+'. '+data[counter]["options"][count]["option_title"]+'</div>';
+			
+		}
+		cols+='</td>';
+		cols += '<td>' + data[counter]["date"] + '</td>';
+	
+	
+		cols += '</tr>';
+		newRow.append(cols);
+		$('#old_poll_line').append(newRow);
+	}
+	var oTable = $("#old_poll_table").dataTable({
+		"bSort": true,
+		"bRetrieve": true,
+		"bProcessing": true,
+		"bDestroy": true
+	});
+	$('#old_poll_table').show();
+	
+	
+}
+// polls end here

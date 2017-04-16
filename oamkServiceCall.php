@@ -31,11 +31,25 @@
 			case "saveNews" : require 'services/saveNews.php';
 			break; 	
 			case "getNews" : require 'services/GetAllNews.php';
+			break;
+			case "SAVE_POLL_SETTINGS" : require 'services/SAVEPOLL.php';
+			break; 
+			case "GETPOLLS" : require 'services/GETPOLLS.php';
 			break; 
 			//teacherCalls begins here
 			case "TEACHERLOGIN" : require 'services/TEACHERLOGIN.php';
 			break;
-			case "SAVETEACHERINFO" : require 'services/TEACHERLOGIN.php';
+			case "SAVETEACHERINFO" : require 'services/SAVETEACHERSINFO.php';
+			break;	
+			case "GETSAVEDINFO" : require 'services/GETSAVEDINFO.php';
+			break;	
+			case "setBackground" : require 'services/SETBACKGROUND.php';
+			break;
+			case "GETSELECTEDPOLLS" : require 'services/GETSELECTEDPOLLS.php';
+			break;	
+			case "SETSELECTEDPOLL" : require 'services/SETSELECTEDPOLL.php';
+			break;
+			case "GETSELECTEDPOLLANDRESULT" : require 'services/GETSELECTEDPOLLANDRESULT.php';
 			break;
 		}
 	} catch (Exception $exception) {

@@ -104,7 +104,7 @@
 									<div class="">
 										<div class="row">
 											<div class="col-xs-12" style="margin-top:8px">
-												<div class="col-xs-6 ">
+												<div class="col-xs-12 ">
 													<div>
 														<div class="boxtitle">
 															Personal Message
@@ -129,19 +129,34 @@
 														<div class="newbox" id="settings_checker">
 															<div>
 																Tutors's Note :
-																<input type="checkbox" name="tutor_note" value="true">
+																<input type="checkbox" id="tutor_note" checked>
 															</div>
 															<div>
 																Your news :
-																<input type="checkbox" name="in_the_news" checked>
+																<input type="checkbox" id="in_the_news" checked>
 															</div>
 															<div>
 																Poll :
-																<input type="checkbox" name="featured_poll" checked>
+																<input type="checkbox" id="featured_poll" checked>
 															</div>
 															<div>
 																Poll Results :
-																<input type="checkbox" name="poll_result" checked>
+																<input type="checkbox" id="poll_result" checked>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-xs-6 ">
+													<div>
+														<div class="boxtitle">
+															Group Details
+														</div>
+														<div class="newbox"  id="group_details">
+																<div>
+																	<div>Group Name: <span id="group_name"></span></div>
+																	<div>Number of students: <span id="number_of_students"></span></div>
+																	<div>Sample URL: <span id="number_of_students"></span></div>
+																
 															</div>
 														</div>
 													</div>
@@ -258,14 +273,15 @@
 									<span style="float:right;cursor:pointer" class="close_top_display">X</span>
 								</div>
 								<div class="row centered ">
-									<div id="contact_info_here" style="min-height:100px;background-color:white;    text-align: left;
-    padding: 20px;">
+									<div id="contact_information_here" >
+										
+										
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-12" style="margin-top:100px;">
+					<div class="col-xs-12" style="margin-top:400px;">
 						<div class="col-xs-8" style=";margin-left:-15px;" id="target_box">
 							<div>
 								<div>
@@ -280,11 +296,13 @@
 										</div>
 										<div class="display">a</div>
 									</div>
-									<div class="row feaded_type1" style="padding:5px;background-color:white;min-height:235px;height:100%;border-top: 3px solid #F47B29;    margin-top: 2px;" id="allnotearea">
-										<div id="inner_cnt_here"></div>
-										<div id="learn_more_here" style="margin-left:30px"></div>
+									<div class="row " style="padding:30px;background-color:white;min-height:235px;height:100%;border-top: 3px solid #F47B29;    margin-top: 2px;" id="allnotearea">
+										<div  class="orangetext" id="tutor_message_title_here"></div><br>
+										<span id="tutor_message_body_here" style="color:#6B6969">
+										
+										</span>
 									</div>
-									<div class="row feaded_type1" style="padding:5px;display:none;background-color:white;border-top: 3px solid #F47B29;    margin-top: 2px;" id="allnewsarea">
+									<div class="row " style="padding:5px;display:none;background-color:white;border-top: 3px solid #F47B29;    margin-top: 2px;" id="allnewsarea">
 										<div id="edit_btn_here" style="    position: absolute;
     right: 5px;z-index:1000">
 											<div class="changeable newsset" ref_tag="featured_setter" style="    position: absolute;   right: 6px;    top:40px;">
@@ -353,11 +371,11 @@
 							</div>
 						</div>
 						<div class="col-xs-4" style="padding-right: 0px;">
-							<div class="col-xs-12 changeable" ref_tag="background" id="background-setter">
-								<div style="    margin-top: -90px;
+							<div class="col-xs-12 changeable"  >
+								<div style="    margin-top: -290px;
     float: right;
     margin-right: -15px;" class="centered">
-									<div class="globaleditbtn  hvr-shrink" data-toggle="tooltip" data-placement="top" title="Change Background">
+									<div class="globaleditbtn  hvr-shrink" data-toggle="tooltip" data-placement="top" title="Change Background" id="background-setter">
 										<img src="../assets/images/edit-btn.png" />
 									</div>
 								</div>
@@ -369,7 +387,7 @@
 										Poll Title
 									</div>
 									<div class="row centered ">
-										<div class="changeable  hvr-shrink" ref_tag="poll_setter" id="poll_setter" style="    position: absolute;
+										<div class="changeable  hvr-shrink"  id="poll_setter" style="    position: absolute;
     right: 4px;
     top: -22px;" data-toggle="tooltip" data-placement="left" title="Change poll Settings">
 											<div class="globaleditbtn ">
@@ -418,6 +436,80 @@ margin-bottom: -15px;min-height:60px" class="text-left">
 				</div>
 			</div>
 		</div>
+		
+		<div id="imageUploader" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-right: -25px;z-index:2000" data-backdrop="static">
+    <div class="modal-dialog" style="width:870px">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom:0px;margin-bottom:-25px">
+             <h3 id="myModalLabel" align="left" style="color:white">Image selection</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-top: -50px;" id="uploader_closer_up">X</button>
+
+            </div>
+            <div class="modal-body" style="padding:20px;margin-bottom: 20px;">
+                <div>
+                    <div style="padding:10px"><div style="text-align:center;font-size:15px">Click on a Image below to select
+                            </div>
+                        <div class="logoSelect" id="logoSelect" style="overflow: auto;
+border: 1px solid #E5E5E5;;
+height: 300px;
+margin: 10px 70px 5px;">
+                            <table id="existingImages" width="100%" class="table table-striped">
+                            </table>
+                        </div>
+    </div>
+                </div>
+            </div>
+            
+               <div class="browse">
+                    <div class="alert-danger" align="center" id="logoerror"></div>
+                    <div class="alert-success" align="center" id="logodone"></div>
+                    <form class="form-inline" enctype="multipart/form-data" id="uploadLogo_simple" method="post" action="../oamkServiceCall.php" target="formsubmitiframelogo">
+                        <input class="uploadLogo" type="hidden" name="oamkSERVICE" id="oamkSERVICE" value="uploadLogo_simple">
+                        <input class="uploadLogo" type="hidden" id="uid_simple" name="uid_simple" value="">
+                        <input class="uploadLogo" type="hidden" id="atoken_simple" name="atoken_simple" value="">
+                        <input class="uploadLogo" type="hidden" id="infoid_simple" name="infoid_simple" value="">   <input class="uploadLogo" type="hidden" id="typehere_simple" name="typehere_simple" value="">
+                        <div>
+                        </div>
+                        
+                          <div style="margin:5px 0px 5px 10px ;">
+                                        <div>
+                                            <h3 style="text-align:center;margin-top: -20px;
+margin-bottom: -5px;"></h3>
+                                        </div>
+                                        <div style="text-align:left">Choose a image to upload (jpg, jpeg, png)</div>
+                                      
+                                        <div >
+                                            <input class="uploadLogo" type="hidden" />
+                                            <input class="uploadLogo" id="uploadLogo_simple" name="uploadLogo_simple" type="file" />
+                                        </div>
+                                         <div>
+                                            <input class="uploadLogo btn btn-primary" id="simpleImageUpload" type="button" value="Upload image" onClick="return ImageValidate(this);" style="margin-top:5px" />
+                                        </div>
+                                        
+                                    </div>
+                        
+                        
+                        
+                        
+                    </form>
+                    <iframe name="formsubmitiframelogo" align="middle" frameborder="0" height="30px"></iframe>
+                </div>
+            <div class="modal-footer">
+                
+
+                <div class="col-xs-6"></div>
+
+                <div class="col-xs-6  centered">
+                     <button class="btn btn-success" id="uploader_apply" style="margin-left:10px">Apply</button>
+                    <button class="btn btn-danger" id="uploader_closer" class="close" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                </div>
+ 
+         
+             
+            </div>
+        </div>
+    </div>
+</div>
 		<div class="modal fade" id="pollsettingsmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:2000 !important">
 			<div class="modal-dialog" style="min-width:900px;">
 				<div class="modal-content">
@@ -425,30 +517,7 @@ margin-bottom: -15px;min-height:60px" class="text-left">
 						<h3 class="modal-title"> Poll settings<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="padding: 6px;">X</button></h3>
 					</div>
 					<div class="modal-body">
-						<div class="row">
-							<div class="col-xs-8">
-							</div>
-							<div class="col-xs-4 ">
-								<button class="btn btn-success pull-right" id="addnewpoll" style="width:100px;    margin-right: 11px;
-    margin-top: 11px;">Add new</button>
-							</div>
-						</div>
-						<div class="col-xs-12 editarea_featured" style="padding:20px;display:none;border:1px solid white;margin-top:20px;margin-bottom:20px;" id="polladdedit_menu">
-							<div class="input-group input-group-lg">
-								<span class="input-group-addon"> Question<span style="color:red">*</span></span>
-								<input id="poll_title_input" class="form-control" placeholder="Title" type="text">
-								<input id="poll_ref_id" class="form-control" type="hidden">
-							</div>
-							<div class="input-group input-group-lg" style="margin-top: 5px;">
-								<span class="input-group-addon">Options<span style="color:red">*</span></span>
-								<div id="option_inputs"></div>
-							</div>
-							<div class="input-group input-group-lg pull-right" style="margin-top: 5px;">
-								<button type="button" class="btn btn-info" id="addoptions" style="margin-right:5px;width:100px">Add options</button>
-								<button type="button" class="btn btn-success" id="savepollsettings" style="margin-right:5px;width:100px">Save</button>
-								<button type="button" class="btn btn-danger" id="closepollsettings" style="margin-right:5px;width:100px">Close</button>
-							</div>
-						</div>
+				
 						<div class="row table-responsive" style="    padding: 20px;
     height: 443px;
     padding-top: 0px;
@@ -460,7 +529,8 @@ margin-bottom: -15px;min-height:60px" class="text-left">
 										<th style="width:60% !important">Poll question</th>
 										<th style="width:5% !important">Active</th>
 										<th style="width:5% !important">Results</th>
-										<th style="width:15% !important"></th>
+									
+									
 									</tr>
 								</thead>
 								<tbody id="poll_list_lines">
