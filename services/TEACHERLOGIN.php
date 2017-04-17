@@ -3,7 +3,7 @@
 	require_once( 'db_include.php' );	
 	$uname = $_POST["username"];
 	$pword = $_POST["password"];
-$pword=md5($pword);
+	$pword=md5($pword);
 	$query = "SELECT access_level,id FROM users where user_name='$uname' and password='$pword'";
 
 $result = mysql_query($query);	

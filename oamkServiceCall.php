@@ -51,6 +51,12 @@
 			break;
 			case "GETSELECTEDPOLLANDRESULT" : require 'services/GETSELECTEDPOLLANDRESULT.php';
 			break;
+			case "SAVEVIDEO" : require 'services/SAVEVIDEO.php';
+			break;
+			case "GETVIDEO" : require 'services/GETVIDEO.php';
+			break;
+
+
 		}
 	} catch (Exception $exception) {
 	    echo '<error>An exception occured while calling the service.</error>';

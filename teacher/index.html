@@ -151,12 +151,15 @@
 														<div class="boxtitle">
 															Group Details
 														</div>
-														<div class="newbox"  id="group_details">
-																<div>
-																	<div>Group Name: <span id="group_name"></span></div>
-																	<div>Number of students: <span id="number_of_students"></span></div>
-																	<div>Sample URL: <span id="number_of_students"></span></div>
-																
+														<div class="newbox" id="group_details">
+															<div>
+																<div>Group Name: <span id="group_name"></span>
+																</div>
+																<div>Number of students: <span id="number_of_students"></span>
+																</div>
+																<div>Sample URL: <span id="number_of_students"></span>
+																</div>
+
 															</div>
 														</div>
 													</div>
@@ -209,7 +212,7 @@
 														</div>
 														<div class="col-xs-12 text-right" style="margin-top:5px">
 															<div class="btn btn-success" id="save_current_teacher">Save Client</div>
-															
+
 														</div>
 													</div>
 												</div>
@@ -273,9 +276,9 @@
 									<span style="float:right;cursor:pointer" class="close_top_display">X</span>
 								</div>
 								<div class="row centered ">
-									<div id="contact_information_here" >
-										
-										
+									<div id="contact_information_here">
+
+
 									</div>
 								</div>
 							</div>
@@ -297,7 +300,8 @@
 										<div class="display">a</div>
 									</div>
 									<div class="row " style="padding:30px;background-color:white;min-height:235px;height:100%;border-top: 3px solid #F47B29;    margin-top: 2px;" id="allnotearea">
-										<div  class="orangetext" id="tutor_message_title_here"></div><br>
+										<div class="orangetext" id="tutor_message_title_here"></div>
+										<br>
 										<span id="tutor_message_body_here" style="color:#6B6969">
 										
 										</span>
@@ -355,12 +359,12 @@
 										<div style="margin-top:30px">
 											<div class="col-xs-12" style="padding-top:10px;padding-bottom:50px">
 												<div id="video_here"></div>
-												<div style="    margin-top: 17px;
+												<div style="margin-top: 17px;
     margin-right: -6px;
     text-align: right;
     z-index: 5;
     margin-bottom: -38px;" class="centered changeable msgset" ref_tag="video_setter">
-													<div class="globaleditbtn  hvr-shrink" data-toggle="tooltip" data-placement="top" title="Change Video Settings">
+													<div class="globaleditbtn  hvr-shrink" data-toggle="tooltip" data-placement="top" title="Change Video Settings" id="video_Setter">
 														<img src="../assets/images/edit-btn.png">
 													</div>
 												</div>
@@ -371,7 +375,7 @@
 							</div>
 						</div>
 						<div class="col-xs-4" style="padding-right: 0px;">
-							<div class="col-xs-12 changeable"  >
+							<div class="col-xs-12 changeable">
 								<div style="    margin-top: -290px;
     float: right;
     margin-right: -15px;" class="centered">
@@ -387,7 +391,7 @@
 										Poll Title
 									</div>
 									<div class="row centered ">
-										<div class="changeable  hvr-shrink"  id="poll_setter" style="    position: absolute;
+										<div class="changeable  hvr-shrink" id="poll_setter" style="    position: absolute;
     right: 4px;
     top: -22px;" data-toggle="tooltip" data-placement="left" title="Change poll Settings">
 											<div class="globaleditbtn ">
@@ -436,80 +440,82 @@ margin-bottom: -15px;min-height:60px" class="text-left">
 				</div>
 			</div>
 		</div>
-		
-		<div id="imageUploader" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-right: -25px;z-index:2000" data-backdrop="static">
-    <div class="modal-dialog" style="width:870px">
-        <div class="modal-content">
-            <div class="modal-header" style="border-bottom:0px;margin-bottom:-25px">
-             <h3 id="myModalLabel" align="left" style="color:white">Image selection</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-top: -50px;" id="uploader_closer_up">X</button>
 
-            </div>
-            <div class="modal-body" style="padding:20px;margin-bottom: 20px;">
-                <div>
-                    <div style="padding:10px"><div style="text-align:center;font-size:15px">Click on a Image below to select
-                            </div>
-                        <div class="logoSelect" id="logoSelect" style="overflow: auto;
+		<div id="imageUploader" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-right: -25px;z-index:2000" data-backdrop="static">
+			<div class="modal-dialog" style="width:870px">
+				<div class="modal-content">
+					<div class="modal-header" style="border-bottom:0px;margin-bottom:-25px">
+						<h3 id="myModalLabel" align="left" style="color:white">Image selection</h3>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-top: -50px;" id="uploader_closer_up">X</button>
+
+					</div>
+					<div class="modal-body" style="padding:20px;margin-bottom: 20px;">
+						<div>
+							<div style="padding:10px">
+								<div style="text-align:center;font-size:15px">Click on a Image below to select
+								</div>
+								<div class="logoSelect" id="logoSelect" style="overflow: auto;
 border: 1px solid #E5E5E5;;
 height: 300px;
 margin: 10px 70px 5px;">
-                            <table id="existingImages" width="100%" class="table table-striped">
-                            </table>
-                        </div>
-    </div>
-                </div>
-            </div>
-            
-               <div class="browse">
-                    <div class="alert-danger" align="center" id="logoerror"></div>
-                    <div class="alert-success" align="center" id="logodone"></div>
-                    <form class="form-inline" enctype="multipart/form-data" id="uploadLogo_simple" method="post" action="../oamkServiceCall.php" target="formsubmitiframelogo">
-                        <input class="uploadLogo" type="hidden" name="oamkSERVICE" id="oamkSERVICE" value="uploadLogo_simple">
-                        <input class="uploadLogo" type="hidden" id="uid_simple" name="uid_simple" value="">
-                        <input class="uploadLogo" type="hidden" id="atoken_simple" name="atoken_simple" value="">
-                        <input class="uploadLogo" type="hidden" id="infoid_simple" name="infoid_simple" value="">   <input class="uploadLogo" type="hidden" id="typehere_simple" name="typehere_simple" value="">
-                        <div>
-                        </div>
-                        
-                          <div style="margin:5px 0px 5px 10px ;">
-                                        <div>
-                                            <h3 style="text-align:center;margin-top: -20px;
+									<table id="existingImages" width="100%" class="table table-striped">
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="browse">
+						<div class="alert-danger" align="center" id="logoerror"></div>
+						<div class="alert-success" align="center" id="logodone"></div>
+						<form class="form-inline" enctype="multipart/form-data" id="uploadLogo_simple" method="post" action="../oamkServiceCall.php" target="formsubmitiframelogo">
+							<input class="uploadLogo" type="hidden" name="oamkSERVICE" id="oamkSERVICE" value="uploadLogo_simple">
+							<input class="uploadLogo" type="hidden" id="uid_simple" name="uid_simple" value="">
+							<input class="uploadLogo" type="hidden" id="atoken_simple" name="atoken_simple" value="">
+							<input class="uploadLogo" type="hidden" id="infoid_simple" name="infoid_simple" value="">
+							<input class="uploadLogo" type="hidden" id="typehere_simple" name="typehere_simple" value="">
+							<div>
+							</div>
+
+							<div style="margin:5px 0px 5px 10px ;">
+								<div>
+									<h3 style="text-align:center;margin-top: -20px;
 margin-bottom: -5px;"></h3>
-                                        </div>
-                                        <div style="text-align:left">Choose a image to upload (jpg, jpeg, png)</div>
-                                      
-                                        <div >
-                                            <input class="uploadLogo" type="hidden" />
-                                            <input class="uploadLogo" id="uploadLogo_simple" name="uploadLogo_simple" type="file" />
-                                        </div>
-                                         <div>
-                                            <input class="uploadLogo btn btn-primary" id="simpleImageUpload" type="button" value="Upload image" onClick="return ImageValidate(this);" style="margin-top:5px" />
-                                        </div>
-                                        
-                                    </div>
-                        
-                        
-                        
-                        
-                    </form>
-                    <iframe name="formsubmitiframelogo" align="middle" frameborder="0" height="30px"></iframe>
-                </div>
-            <div class="modal-footer">
-                
+								</div>
+								<div style="text-align:left">Choose a image to upload (jpg, jpeg, png)</div>
 
-                <div class="col-xs-6"></div>
+								<div>
+									<input class="uploadLogo" type="hidden" />
+									<input class="uploadLogo" id="uploadLogo_simple" name="uploadLogo_simple" type="file" />
+								</div>
+								<div>
+									<input class="uploadLogo btn btn-primary" id="simpleImageUpload" type="button" value="Upload image" onClick="return ImageValidate(this);" style="margin-top:5px" />
+								</div>
 
-                <div class="col-xs-6  centered">
-                     <button class="btn btn-success" id="uploader_apply" style="margin-left:10px">Apply</button>
-                    <button class="btn btn-danger" id="uploader_closer" class="close" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                </div>
- 
-         
-             
-            </div>
-        </div>
-    </div>
-</div>
+							</div>
+
+
+
+
+						</form>
+						<iframe name="formsubmitiframelogo" align="middle" frameborder="0" height="30px"></iframe>
+					</div>
+					<div class="modal-footer">
+
+
+						<div class="col-xs-6"></div>
+
+						<div class="col-xs-6  centered">
+							<button class="btn btn-success" id="uploader_apply" style="margin-left:10px">Apply</button>
+							<button class="btn btn-danger" id="uploader_closer" class="close" data-dismiss="modal" aria-hidden="true">Cancel</button>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" id="pollsettingsmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:2000 !important">
 			<div class="modal-dialog" style="min-width:900px;">
 				<div class="modal-content">
@@ -517,7 +523,7 @@ margin-bottom: -5px;"></h3>
 						<h3 class="modal-title"> Poll settings<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="padding: 6px;">X</button></h3>
 					</div>
 					<div class="modal-body">
-				
+
 						<div class="row table-responsive" style="    padding: 20px;
     height: 443px;
     padding-top: 0px;
@@ -529,8 +535,8 @@ margin-bottom: -5px;"></h3>
 										<th style="width:60% !important">Poll question</th>
 										<th style="width:5% !important">Active</th>
 										<th style="width:5% !important">Results</th>
-									
-									
+
+
 									</tr>
 								</thead>
 								<tbody id="poll_list_lines">
@@ -544,6 +550,36 @@ margin-bottom: -5px;"></h3>
 				</div>
 			</div>
 		</div>
+
+		<div class="modal fade" id="videoSettings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:2000 !important">
+			<div class="modal-dialog" style="min-width:900px;">
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 25px;">
+						<h3 class="modal-title"> Video settings<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="padding: 6px;">X</button></h3>
+					</div>
+					<div class="modal-body">
+
+						<div class="newbox">
+							<div class="input-group input-group-lg">
+								<span class="input-group-addon">Video Title:<span style="color:red">*</span></span>
+								<input id="tutor_video_title" class="form-control" placeholder="Your video title" type="text" maxlength="20">
+							</div>
+							<div class="input-group input-group-lg">
+								<span class="input-group-addon">Video Details:<span style="color:red">*</span></span>
+								<textarea class="form-control" id="video_details" style="    height: 200px;"></textarea>
+							</div>
+							<div class="input-group input-group-lg">
+								<span class="input-group-addon">Video Code:<span style="color:red">*</span></span>
+								<textarea class="form-control" id="video_code" style="    height: 200px;"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer" style="margin-top: 0px;">
+						<button type="button" id="save_Video" class="btn btn-success" style="width:100px">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.13/datatables.min.js"></script>
@@ -551,4 +587,5 @@ margin-bottom: -5px;"></h3>
 	<script src="../assets/js/teachers.js"></script>
 	<script src="../assets/js/jquery.cookie.js"></script>
 </body>
+
 </html>

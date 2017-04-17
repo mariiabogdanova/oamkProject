@@ -3022,3 +3022,20 @@ label {
     cursor: pointer;
     height: 33px;
 }
+#video_here iframe{
+	
+	    width: 100% !important;
+    height: 200px !important;
+    border: 3px solid white !important;
+}
+.video_title{
+	font-size: 18px;
+	font-weight: bold;
+	
+}
+.video_desc{
+	font-size: 15px;
+	font-weight: normal;
+	color:white;
+	
+}

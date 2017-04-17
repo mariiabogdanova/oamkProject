@@ -54,6 +54,7 @@ function showLoggedInPage() {
 	$('#logedin-page').show();
 	teacherInfoManager();
 	getSelectedPollandResult();
+	getCurrentVideo("show");
 }
 
 function setUserToLoggedOut() {
@@ -539,11 +540,88 @@ function getSelectedPollandResult(){
 	$.post(SERVER_URL, request, function (result) {
 		stopLoading();
 		if (result.RESULT == "SUCCESS") {
-			showPolls(result.DATA);
+			//showPolls(result.DATA);
 		}
 	}, "json");
 	
 }
+
 //poll here
 //video here
+
+
+$(document).on("click", "#video_Setter", function () {
+	
+	
+	
+	openVideoSettings();
+		 
+	});
+
+$(document).on("click", "#save_Video", function () {
+	showLoading();
+	var video_title=$('#tutor_video_title').val();
+var video_details=$('#video_details').val();
+var video_code=$('#video_code').val();
+	var request = getRequestObject({
+		video_title:video_title,
+video_details:video_details,
+video_code:video_code
+			}, "SAVEVIDEO");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			getCurrentVideo("show");
+		}
+	}, "json");
+	
+	
+	
+
+		 
+	});
+function openVideoSettings(){
+
+$('#tutor_video_title').val('');
+$('#video_details').val('');
+$('#video_code').val('');
+	
+	getCurrentVideo("GET");
+	
+}
+function getCurrentVideo(type){
+	
+	var request = getRequestObject({
+		
+			}, "GETVIDEO");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+				if(type=="GET"){
+					
+					$('#tutor_video_title').val('');
+$('#video_details').val('');
+$('#video_code').val('');	
+					
+					if(result.DATA.length>0){
+						$('#tutor_video_title').val(result.DATA[0]["video_title"]);
+						$('#video_details').val(result.DATA[0]["video_desc"]);
+						$('#video_code').val(result.DATA[0]["video_code"]);	
+					
+						
+					}
+				
+				$('#videoSettings').modal();
+				}
+			var video_code='<div class="col-xs-6"><div></div><div></div></div><div class="col-xs-6"><div></div></div>';
+			if(result.DATA.length>0){
+			var video_code='<div class="col-xs-6"><div class="video_title">'+result.DATA[0]["video_title"]+'</div><div class="video_desc">'+result.DATA[0]["video_desc"]+'</div></div><div class="col-xs-6">'+result.DATA[0]["video_code"]+'</div>';
+			}
+				$('#video_here').html(video_code);
+		
+		}
+	}, "json");
+}
+
+
 //video ends here
