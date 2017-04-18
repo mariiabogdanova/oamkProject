@@ -625,3 +625,51 @@ $('#video_code').val('');
 
 
 //video ends here
+
+
+//news manage
+
+
+$(document).on("click", "#editNews", function () {
+	var request = getRequestObject({
+			}, "getnews");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			showNews(result.DATA);
+		}
+	}, "json");
+	
+});
+
+$(document).on("click", ".checkboxes_for_news", function () {
+	
+	
+	
+	var ref_id=$(this).attr("id");
+	
+	$('#news_box_1 .title').html(allnews[ref_id]["content_title"]);
+	$('#news_box_1 .body').html(allnews[ref_id]["content_description"]);
+	
+});
+var allnews=new Array();
+function showNews(DATA){
+	var content="";
+	for(var count=0;count<DATA.length;count++){
+		
+			allnews[DATA[count]["id"]]=DATA[count];
+		content+='<div class="col-xs-12" ><div class="col-xs-6">'+(count+1)+'. ';
+		content+=DATA[count]["content_title"];
+		content+='</div><div class="col-xs-6"><input type="checkbox" class="checkboxes_for_news" id="'+DATA[count]["id"]+'"/></div></div>';
+		
+		
+	}
+	
+	$('#news_content').html(content);
+	$('#newsPopup').modal();
+	
+}
+
+
+
+//new manage ends here

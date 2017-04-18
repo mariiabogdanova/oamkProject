@@ -55,6 +55,8 @@
 			break;
 			case "GETVIDEO" : require 'services/GETVIDEO.php';
 			break;
+			case "getnews" : require 'services/getnews.php';
+			break;
 
 
 		}
