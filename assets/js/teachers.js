@@ -648,11 +648,49 @@ $(document).on("click", ".checkboxes_for_news", function () {
 	
 	var ref_id=$(this).attr("id");
 	
+	var ischecked=$(this).is(":checked");
+	
+	if(ischecked==true){
+		
+		howmanyselected++;
+		
+	}else{
+		
+		howmanyselected--;
+	}
+
+	
+	if (howmanyselected==1){
 	$('#news_box_1 .title').html(allnews[ref_id]["content_title"]);
 	$('#news_box_1 .body').html(allnews[ref_id]["content_description"]);
+	$('#news_image_1').attr('src','../assets/news_images/'+allnews[ref_id]["content_photo"]);
+		
+		
+		
+	}
 	
+		if (howmanyselected==2){
+	$('#news_box_2 .title').html(allnews[ref_id]["content_title"]);
+	$('#news_box_2 .body').html(allnews[ref_id]["content_description"]);
+	$('#news_image_2').attr('src','../assets/news_images/'+allnews[ref_id]["content_photo"]);
+	}
+	
+		if (howmanyselected==3){
+	$('#news_box_3 .title').html(allnews[ref_id]["content_title"]);
+	$('#news_box_3 .body').html(allnews[ref_id]["content_description"]);
+	$('#news_image_3').attr('src','../assets/news_images/'+allnews[ref_id]["content_photo"]);
+		
+	}
+	
+	if (howmanyselected>3){
+		alert("You can only select three news topics");
+		
+	}
+	
+
 });
 var allnews=new Array();
+var howmanyselected=0;
 function showNews(DATA){
 	var content="";
 	for(var count=0;count<DATA.length;count++){
