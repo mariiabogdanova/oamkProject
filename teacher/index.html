@@ -309,49 +309,49 @@
 									<div class="row " style="padding:5px;display:none;background-color:white;border-top: 3px solid #F47B29;    margin-top: 2px;" id="allnewsarea">
 										<div id="edit_btn_here" style="    position: absolute;
     right: 5px;z-index:1000">
-											<div class="changeable newsset" ref_tag="featured_setter" style="    position: absolute;   right: 6px;    top:40px;">
+											<div class="changeable newsset" ref_tag="featured_setter" style="    position: absolute;   right: 6px;    top:40px;" id="editNews">
 												<div class="globaleditbtn  hvr-shrink">
 													<img src="../assets/images/edit-btn.png" />
 												</div>
 											</div>
 										</div>
 										<div class="col-xs-12 changeable" style="margin-top: 30px" ref_tag="news_setter">
-											<div class="col-xs-8" style="color:#6B6969;margin-right:-30px">
-												<span class="orangetext"> Lorem ipsum dolor sit amet</span>
+											<div class="col-xs-8" style="color:#6B6969;margin-right:-30px" id="news_box_1">
+												<span class="orangetext title"> Lorem ipsum dolor sit amet</span>
 												<br>
-												<span>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo.<br>
+												<span class="body">  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo.<br>
                     bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo</span>
 												<br>
 												<span class="orangetext">Learn more</span>
 											</div>
 											<div class="col-xs-4 pull-right text-right ">
-												<img class="display_image" src="../assets/featured_images/article_images/display_two.jpg">
+												<img class="display_image" src="../assets/featured_images/article_images/display_two.jpg" id="news_image_1">
 											</div>
 										</div>
 										<div class="col-xs-12 changeable" style="margin-top: 30px;" ref_tag="news_setter">
 											<div class="col-xs-4">
-												<img class="display_image" src="../assets/featured_images/article_images/display_one.jpg">
+												<img class="display_image" src="../assets/featured_images/article_images/display_one.jpg" id="news_image_2">
 											</div>
-											<div class="col-xs-8" style="color:#6B6969;margin-left:-30px">
-												<span class="orangetext"> Lorem ipsum dolor sit amet</span>
+											<div class="col-xs-8" style="color:#6B6969;margin-left:-30px" id="news_box_2">
+												<span class="orangetext title"> Lorem ipsum dolor sit amet</span>
 												<br>
-												<span>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo.<br>
+												<span class="body">  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo.<br>
                     bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo</span>
 												<br>
 												<span class="orangetext">Learn more</span>
 											</div>
 										</div>
 										<div class="col-xs-12 changeable" style="margin-top: 30px;" ref_tag="news_setter">
-											<div class="col-xs-8" style="color:#6B6969;margin-right:-30px">
-												<span class="orangetext"> Lorem ipsum dolor sit amet</span>
+											<div class="col-xs-8" style="color:#6B6969;margin-right:-30px" id="news_box_3">
+												<span class="orangetext title"> Lorem ipsum dolor sit amet</span>
 												<br>
-												<span>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo.<br>
+												<span class="body">  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo.<br>
                     bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo</span>
 												<br>
 												<span class="orangetext">Learn more</span>
 											</div>
 											<div class="col-xs-4 pull-right text-right">
-												<img class="display_image" src="../assets/featured_images/article_images/display_two.jpg">
+												<img class="display_image" src="../assets/featured_images/article_images/display_two.jpg" id="news_image_3">
 											</div>
 										</div>
 									</div>
@@ -549,19 +549,30 @@ margin-bottom: -5px;"></h3>
 					</div>
 				</div>
 			</div>
-		</div><div class="modal fade" id="newsSettingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:2000 !important">
-			<div class="modal-dialog" style="min-width:900px;">
-				<div class="modal-content">
-					<div class="modal-header" style="padding: 25px;">
-						<h3 class="modal-title"> News settings<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="padding: 6px;">X</button></h3>
-					</div>
-					<div class="modal-body">
-
-						<div class="row table-responsive" style="    padding: 20px;
+		</div>
+		
+		
+		
+		
+		
+		
+		<div class="modal fade" tabindex="-1" role="dialog" id="newsPopup">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Manage News</h4>
+      </div>
+      <div class="modal-body row">
+       			
+		  
+		  
+		  
+		  <div class="col-xs-12 table-responsive" style="    padding: 20px;
     height: 443px;
     padding-top: 0px;
     margin-top: 10px;">
-							<table id="poll_list" class="table table-bordered table-striped table-hover" style="color:grey">
+							<table id="news_list" class="table table-bordered table-striped table-hover" style="color:grey">
 								<thead>
 									<tr style="font-size:11px">
 										<th style="width:5% !important">ID</th>
@@ -572,10 +583,35 @@ margin-bottom: -5px;"></h3>
 
 									</tr>
 								</thead>
-								<tbody id="poll_list_lines">
+								<tbody id="news_list_lines">
 								</tbody>
 							</table>
 						</div>
+		  
+		  
+		  
+		  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+		
+		
+		
+		
+		<div class="modal fade" id="newsSettingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:2000 !important">
+			<div class="modal-dialog" style="min-width:900px;">
+				<div class="modal-content">
+					<div class="modal-header" style="padding: 25px;">
+						<h3 class="modal-title"> News settings<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="padding: 6px;">X</button></h3>
+					</div>
+					<div class="modal-body">
+
+						
 					</div>
 					<div class="modal-footer" style="margin-top: 0px;">
 						<button type="button" data-dismiss="modal" class="btn btn-danger" style="width:100px">Close</button>

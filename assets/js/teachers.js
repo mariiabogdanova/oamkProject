@@ -625,3 +625,118 @@ $('#video_code').val('');
 
 
 //video ends here
+
+
+//news manage
+
+
+$(document).on("click", "#editNews", function () {
+	var request = getRequestObject({
+			}, "getnews");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			showNews(result.DATA);
+		}
+	}, "json");
+	
+});
+
+$(document).on("click", ".checkboxes_for_news", function () {
+	
+	//var current
+	
+	var ref_id=$(this).attr("id");
+	
+	var ischecked=$(this).is(":checked");
+	
+	if(ischecked==true){
+		
+		howmanyselected++;
+		
+	}else{
+		
+		howmanyselected--;
+	}
+
+	
+	if (howmanyselected==1){
+	$('#news_box_1 .title').html(allnews[ref_id]["content_title"]);
+	$('#news_box_1 .body').html(allnews[ref_id]["content_description"]);
+	$('#news_image_1').attr('src','../assets/news_images/'+allnews[ref_id]["content_photo"]);
+		
+		
+		
+	}
+	
+		if (howmanyselected==2){
+	$('#news_box_2 .title').html(allnews[ref_id]["content_title"]);
+	$('#news_box_2 .body').html(allnews[ref_id]["content_description"]);
+	$('#news_image_2').attr('src','../assets/news_images/'+allnews[ref_id]["content_photo"]);
+	}
+	
+		if (howmanyselected==3){
+	$('#news_box_3 .title').html(allnews[ref_id]["content_title"]);
+	$('#news_box_3 .body').html(allnews[ref_id]["content_description"]);
+	$('#news_image_3').attr('src','../assets/news_images/'+allnews[ref_id]["content_photo"]);
+		
+	}
+	
+	if (howmanyselected>3){
+		alert("You can only select three news topics");
+		
+	}
+	
+
+});
+var allnews=new Array();
+var howmanyselected=0;
+function showNews(DATA){
+	var content="";
+	
+	
+	
+
+	$('#news_list_lines').empty()
+	for (count = 0; count < DATA.length; count++) {
+		var newRow = $('<tr style="font-size:11px">');
+		var cols = "";
+		cols += '<td>' + (count + 1) + '</td>';
+		cols += '<td>' + DATA[count]["content_title"] + '</td>';
+		cols += '<td><input type="checkbox" class="checkboxes_for_news" id="'+DATA[count]["id"]+'"/></td>';
+		
+		cols += '</tr>';
+		newRow.append(cols);
+		$('#news_list_lines').append(newRow);
+	}
+	var oTable = $("#news_list").dataTable({
+		"bSort": true,
+		"bRetrieve": true,
+		"bProcessing": true,
+		"bDestroy": true
+	});
+	$('#news_list').show();
+	
+	
+	
+	
+	
+	/*
+	for(var count=0;count<DATA.length;count++){
+		
+			allnews[DATA[count]["id"]]=DATA[count];
+		content+='<div class="col-xs-12" ><div class="col-xs-6">'+(count+1)+'. ';
+		content+=DATA[count]["content_title"];
+		content+='</div><div class="col-xs-6"><input type="checkbox" class="checkboxes_for_news" id="'+DATA[count]["id"]+'"/></div></div>';
+		
+		
+	}$('#news_content').html(content);
+	*/
+	
+	$('#newsPopup').modal();
+	
+}
+
+
+
+//new manage ends here
