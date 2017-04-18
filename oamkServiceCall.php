@@ -57,6 +57,8 @@
 			break;
 			case "getnews" : require 'services/getnews.php';
 			break;
+			case "setNews" : require 'services/setNews.php';
+			break;
 
 
 		}
