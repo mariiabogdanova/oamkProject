@@ -6,6 +6,7 @@
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="student_view.php"></script>
 </head>
 <body>
 
@@ -81,22 +82,65 @@
 </div>
 </div>
 
-
-
-<div id="pollBoxes" class="container poll">
-    <div class="row poll">
-    <div class="col-lg-3 col-lg-offset-8 col-xs-12">
-    
-        <h5 id="pollHeader"   >Enter the poll header here: </h5>
-        <div id="pollQuestions"> 
-			<form  action="" method="post">
-            <label for="question">Ask your question here:</label> <br />
-            <input type="radio" name="answer" value="A"> Answer A <br />
-            <input type="radio" name="answer" value="B"> Answer B <br />
-            <input type="radio" name="answer" value="C"> Answer C <br />
-        </form>
+<div class="col-lg-3 col-lg-offset-8 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-chevron-right"></span>Here we have the simple poll for the students:</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" value="">
+                                    Choice A
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" value="">
+                                    Choice B
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" value="">
+                                    Choice C
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" value="">
+                                    Choice D
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="radio">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    Canada
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer text-center">
+                    <button type="button" class="btn btn-primary btn-block btn-sm">
+                        Vote</button>
+                    <a href="#" class="small">View Result</a></div>
+            </div>
         </div>
-    
+        
+
+
     <br />
     
     <h5 id="pollResultHeader"> Poll Results: </h5>
