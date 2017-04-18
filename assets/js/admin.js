@@ -7,15 +7,16 @@ var adminMenuArray = [{
 	items: ["Manage Students", "Analytics"], //"Assign Groups",
 	fnct: ["manage_students", "Analytics_student"] //, "Assign Groups"
 }, {
-	group: "Manage News",
-	items: ["Add News", "Analytics"],
-	fnct: ["Add News", "Analytics"],
+	group: "Manage News/Polls",
+	items: ["Manange News", "Manage Polls"],
+	fnct: ["Add_News", "Add_polls"],
 }, {
 	group: "Analytics",
 	items: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"],
 	fnct: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"]
 }];
 var student_links = new Array();
+var imageSelected="";
 function bodyLoaded() {
 	var bug_Test = false;
 	if (bug_Test == true) {
@@ -24,6 +25,7 @@ function bodyLoaded() {
 		showLogin();
 	}
 }
+
 function showLogin() {
 	if (($.cookie('oamk_admin_userinfo') != null)) {
 		userLoginJsn = JSON.parse($.cookie('oamk_admin_userinfo'));
@@ -34,7 +36,9 @@ function showLogin() {
 		adminFunctions();
 	}
 }
+
 function adminFunctions() {
+	
 	$(document).on("click", "#sign_in", function () {
 		doLogin();
 	});
@@ -42,6 +46,7 @@ function adminFunctions() {
 		doLogOut();
 	});
 }
+
 function doLogin() {
 	var username = $('#user_name').val();
 	var password = $('#password').val();
@@ -51,10 +56,12 @@ function doLogin() {
 		showPop("Invalid", "Enter proper username/password.");
 	}
 }
+
 function doLogOut() {
 	setUserToLoggedOut();
 	//showLogin();
 }
+
 function showLoggedInPage() {
 	$('#login-page').hide();
 	$('#logged-in-page').show();
@@ -72,6 +79,7 @@ function showLoggedInPage() {
 		showContent($(this).attr("ref_id"));
 	});
 }
+
 function showContent(ref_id) {
 	$('.contentArea .container').hide();
 	//if(ref_id='add_teacher'){
@@ -91,9 +99,234 @@ function showContent(ref_id) {
 			break;
 		case "Analytics_student":
 			studentAnalytics();
+			break;
+
+		case "Analytics_student":
+			studentAnalytics();
+			break;
+
+		case "Add_News":
+			manageNews();
+			break;
+		case "Add_polls":
+			managePolls();
+			break;
 		default:
 	}
 }
+//manage news here
+
+function manageNews() {
+getOldNews();
+	$('#manage_news').show();
+	$('#old_news').show();
+	$('#add_news_form').hide();
+	$('#add_news_form input').val('');
+
+
+}
+
+$(document).on("click", "#create_new_news", function () {
+	createNewNews();
+});
+
+$(document).on("click", "#image_Selector", function () {
+	getImageGallery();
+});
+
+function createNewNews() {
+
+	$('#add_news_form').show();
+	$('#add_news_form input').val('');
+}
+function getImageGallery(){
+	getImages();
+	$('#imageUploader').modal();
+}
+function getImages(){
+	showLoading();
+	var request = getRequestObject({}, "getImages");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			
+			showimages(result.MSG);
+		} else {}
+	}, "json");
+}
+
+function showimages(data) {
+     
+    $('#existingImages').empty();
+    for (i = 0; i < data.length; i++) {
+        var newRow = $("<tr>");
+        var cols = "";
+        var delbtn = data[i]["name"].replace(".", "_");
+        cols += '<td style="padding: 4px;border: 0px none;"><div class="col-xs-3"><a class="featuredimages" fname="' + data[i]["name"] + '"><img src=".' + data[i]["path"] + '" width="80px" height="48px" style="border:1px solid #000;padding:1px"></a></div><div class="col-xs-6" style="padding-top: 10px;"> ' + data[i]["name"] + '</div></td>';
+        
+        newRow.append(cols);
+        $('#existingImages').append(newRow);
+    }
+    $('.featuredimages').click(function () {
+
+        var filename = $(this).attr("fname");
+        $('.featuredimages img').css("border", "0px solid red");
+        $(this).find("img").css("border", "3px solid red");
+		
+        imageSelected = filename;
+
+    });
+  
+    
+}
+
+
+
+
+
+
+$(document).on("click", "#uploader_apply", function () {
+	$('#selected_image').html('<img src="../assets/news_images/' + imageSelected + '" style="width:100px;height:100px"/>');
+$('#news_image').val(imageSelected);
+	$('#imageUploader').modal('hide');
+
+});
+
+$(document).on("click", "#uploader_closer", function () {
+	$('#selected_image').html('');
+$('#news_image').val();
+
+});
+
+
+$(document).on("click", "#saveCurrentNews", function () {
+	
+	
+var title=$('#news_title').val();
+var body=$('#news_body').val();
+var image=$('#news_image').val();
+	
+	if(title.length==0 || body.length==0 || image.length==0)
+		{
+			showPop("News Error","Please provide title, body and image for the news.");
+			
+		}
+	else{
+		var request = getRequestObject({
+			title:title,
+			body:body,
+			image:image
+		}, "saveNews");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			
+				showPop("Content Saved!","News has been added.");
+			$('#news_title').val('');
+			$('#news_body').val('');
+			$('#news_image').val('');
+			getOldNews();
+		} 
+	}, "json");
+		
+	}
+	
+});
+
+function getOldNews(){
+	
+	$('#add_news_form').hide();
+	$('#add_news_form input').val('');
+	
+		showLoading();
+	var request = getRequestObject({}, "getNews");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			
+			showOldNews(result.DATA);
+		} else {}
+	}, "json");
+}
+function showOldNews(data){
+
+	$('#old_news_line').empty()
+	for (counter = 0; counter < data.length; counter++) {
+		var newRow = $('<tr style="font-size:11px">');
+		var cols = "";
+		cols += '<td>' + (counter + 1) + '</td>';
+		cols += '<td>' + data[counter]["content_title"] + '</td>';
+		cols += '<td><img src="../assets/news_images/' + data[counter]["content_photo"] + '" style="width:100px;height:100px"/></td>';
+		cols += '<td>' + data[counter]["content_description"] + '</td>';
+		cols += '<td>' + data[counter]["date"] + '</td>';
+	
+		cols += '</tr>';
+		newRow.append(cols);
+		$('#old_news_line').append(newRow);
+	}
+	var oTable = $("#old_news_table").dataTable({
+		"bSort": true,
+		"bRetrieve": true,
+		"bProcessing": true,
+		"bDestroy": true
+	});
+	$('#old_news_table').show();
+	
+}
+var _validLogoExtensions = [".jpg",".jpeg",".png"];
+var locationforimage = "";
+function ImageValidate(input_Form) {
+    $('.loading').show();
+    var arrInputs = document.getElementsByClassName("uploadLogo");
+    for (var i = 0; i < arrInputs.length; i++) {
+        var oInput = arrInputs[i];
+        if (oInput.type == "file") {
+            var sFileName = oInput.value;
+            if (sFileName.length > 0) {
+                var Validity = false;
+                for (var j = 0; j < _validLogoExtensions.length; j++) {
+                    var sCurExtension = _validLogoExtensions[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                        Validity = true;
+
+                        $("#uid_simple").val(userLoginJsn.oamk_userid);
+                        $("#atoken_simple").val(userLoginJsn.oamk_useraccesstoken);
+                        $("#infoid_simple").val(Math.random() * 10000000000000000 + 1);
+                        $("#typehere_simple").val(locationforimage);
+                        $("#uploadLogo_simple").submit();
+						
+                        break;
+                    }
+                }
+                if (!Validity) {
+                    $('.loading').hide();
+                    loadedlogos("Error", "You are submitting a file type that is not allowed.  The permitted file types are: .jpg,.jpeg,.png");
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+function loadedlogos(title, msg) {
+    $('.loading').hide();
+    showPop(title, msg);
+
+getImages();
+    
+
+}
+
+
+function afterLogoUpload(name, location) //filename to show after upload
+{
+    $('.loading').hide();
+   getImages();
+}
+
+
+//manage news ends
 function showAnalytics() {
 	var request = getRequestObject({}, "TEACHER_GROUP_ANALYTICS");
 	$.post(SERVER_URL, request, function (result) {
@@ -113,9 +346,11 @@ function showAnalytics() {
 		} else {}
 	}, "json");
 }
+
 function showLoading() {
 	$('.loading').show();
 }
+
 function stopLoading() {
 	$('.loading').fadeOut("slow");
 }
@@ -131,6 +366,7 @@ function getOldTeachers() {
 		} else {}
 	}, "json");
 }
+
 function fillTeacherTable(data) {
 	$('#old_teachers_line').empty()
 	for (counter = 0; counter < data.length; counter++) {
@@ -152,6 +388,7 @@ function fillTeacherTable(data) {
 	});
 	$('#old_teachers').show();
 }
+
 function manager_teachers() {
 	$('#create_new_teacher').show();;
 	$('#old_teachers').hide();
@@ -162,10 +399,12 @@ function manager_teachers() {
 		$('#teacher_password').val('');
 		$('#add_techer_form').show();
 	});
-	$(document).on("click", "#create_new_teacher_save", function () {
-		createNewTeacher();
-	});
+
 }
+$(document).on("click", "#create_new_teacher_save", function () {
+	createNewTeacher();
+});
+
 function createNewTeacher() {
 	var teacher_username = $('#teacher_username').val();
 	var teacher_password = $('#teacher_password').val();
@@ -193,6 +432,7 @@ function createNewTeacher() {
 $(document).on("click", "#create_new_group_save", function () {
 	saveNewGroup();
 });
+
 function manage_groups() {
 	$('#old_groups').show();
 	$('#old_group_table').hide();
@@ -203,6 +443,7 @@ function manage_groups() {
 		getListofTeachers();
 	});
 }
+
 function getOldGroups() {
 	showLoading();
 	var request = getRequestObject({}, "GETOLDGROUPS");
@@ -215,6 +456,7 @@ function getOldGroups() {
 		} else {}
 	}, "json");
 }
+
 function fillGroupTable(data) {
 	$('#old_group_line').empty()
 	for (counter = 0; counter < data.length; counter++) {
@@ -235,6 +477,7 @@ function fillGroupTable(data) {
 	});
 	$('#old_group_table').show();
 }
+
 function getListofTeachers() {
 	var request = getRequestObject({}, "GETTEACHERNAMES");
 	$.post(SERVER_URL, request, function (result) {
@@ -254,6 +497,7 @@ function getListofTeachers() {
 		}
 	}, "json");
 }
+
 function saveNewGroup() {
 	var group_name = $('#group_name').val();
 	var group_teacher = $('#group_teacher').val();
@@ -293,6 +537,7 @@ $(document).on("click", "#view_students", function () {
 $(document).on("click", "#saveCurrentStudent", function () {
 	saveCurrentStudent();
 });
+
 function checkFields(fname, lname, code, email, group) {
 	var missing = new Array;
 	if (fname.length == 0) {
@@ -309,10 +554,12 @@ function checkFields(fname, lname, code, email, group) {
 	}
 	return missing;
 }
+
 function validateEmail(email) {
 	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(email);
 }
+
 function saveCurrentStudent() {
 	var fname = $('#student_first_name').val();
 	var lname = $('#student_last_name').val();
@@ -346,6 +593,7 @@ function saveCurrentStudent() {
 		}
 	}
 }
+
 function getStudents() {
 	showLoading();
 	var request = getRequestObject({
@@ -360,6 +608,7 @@ function getStudents() {
 		} else {}
 	}, "json");
 }
+
 function fillStudentsTable(data) {
 	$('#old_students_line').empty();
 	for (counter = 0; counter < data.length; counter++) {
@@ -386,6 +635,7 @@ function fillStudentsTable(data) {
 	});
 	$('#old_group_table').show();
 }
+
 function showlink(ref) {
 	var title = "Students Specific Linker";
 	var body = '<a href="../students/student_view.html?access_token=' + student_links[ref]["access_code"] + '" class="btn btn-xs btn-info" target="_blank">Link</a>';
@@ -401,6 +651,7 @@ $(document).on("click", "#add_students", function () {
 		showGroupError();
 	}
 });
+
 function manangeStudents() {
 	getGroupTeachers();
 	$('#show_old_students').hide();
@@ -410,6 +661,7 @@ function manangeStudents() {
 	//view_students
 	//add_students
 }
+
 function getGroupTeachers() {
 	var request = getRequestObject({}, "GETGROUPANDTEACHER");
 	$.post(SERVER_URL, request, function (result) {
@@ -435,94 +687,205 @@ function showPop(title, body) {
 	$('#alert_popup_content').html(body);
 	$('#alert_popup').modal();
 }
+
 function create_groups() {
 	$('#create_group_form').show();
 }
+
 function remove_group() {
 	$('#remove_group_form').show();
 }
+
 function edit_groups() {
 	$('#edit_groups_form').show();
 }
 
-function studentAnalytics(){
-	
-	
-	
+function studentAnalytics() {
+
+
+
 	showLoading();
-	var request = getRequestObject({
-		}, "STUDENTANALYTICS");
+	var request = getRequestObject({}, "STUDENTANALYTICS");
 	$.post(SERVER_URL, request, function (result) {
 		stopLoading();
 		if (result.RESULT == "SUCCESS") {
-				
-				drawChart(result.DATA);
-		
+
+			drawChart(result.DATA);
+
 		} else {}
 	}, "json");
-	
-	
-	
+
+
+
 
 
 }
 
-    function drawChart(DATA) {
-		
-		var GROUPS = [];
-         var STUDENTS = [];
-         for (counter = 0; counter < DATA.length; counter++) {
-             //var d = totaldata[counter]["game_play_date_time"];
-            STUDENTS.push(Number(DATA[counter]["STUDENTS"]));
-              GROUPS.push((DATA[counter]["GROUPNAME"]));
-         }
+function drawChart(DATA) {
 
-  
-		 $(function () {
-             $('#myPieChart').highcharts({
-                 chart: {
-                     type: 'column'
-                 },
-                 title: {
-                     text: 'Students / Group Analytics'
-                 },
-                 subtitle: {
-                     text: 'Total students in a group'
-                 },
-                 xAxis: {
-                     categories: GROUPS,
-                     labels: {
-                         rotation: -45,
-                         style: {
-                             fontSize: '13px',
-                             fontFamily: 'Verdana, sans-serif'
-                         }
-                     }
-                 },
-                 yAxis: {
-                     min: 0,
-                     title: {
-                         text: 'Total Number of Students'
-                     }
-                 },
-                 tooltip: {
-                     headerFormat: '<span style="font-size:10px">{point.x}</span><table>',
-                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                         '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
-                     footerFormat: '</table>',
-                     shared: true,
-                     useHTML: true
-                 },
-                 plotOptions: {
-                     column: {
-                         pointPadding: 0.2,
-                         borderWidth: 0
-                     }
-                 },
-                 series: [{
-                     name: 'Number of Students',
-                     data: STUDENTS
-                 }]
-             });
-         });
+	var GROUPS = [];
+	var STUDENTS = [];
+	for (counter = 0; counter < DATA.length; counter++) {
+		STUDENTS.push(Number(DATA[counter]["STUDENTS"]));
+		GROUPS.push((DATA[counter]["GROUPNAME"]));
+	}
+
+
+	$(function () {
+		$('#myPieChart').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Students / Group Analytics'
+			},
+			subtitle: {
+				text: 'Total students in a group'
+			},
+			xAxis: {
+				categories: GROUPS,
+				labels: {
+					rotation: -45,
+					style: {
+						fontSize: '13px',
+						fontFamily: 'Verdana, sans-serif'
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: 'Total Number of Students'
+				}
+			},
+			tooltip: {
+				headerFormat: '<span style="font-size:10px">{point.x}</span><table>',
+				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+					'<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+				footerFormat: '</table>',
+				shared: true,
+				useHTML: true
+			},
+			plotOptions: {
+				column: {
+					pointPadding: 0.2,
+					borderWidth: 0
+				}
+			},
+			series: [{
+				name: 'Number of Students',
+				data: STUDENTS
+            }]
+		});
+	});
+}
+// adding polls
+function managePolls(){
+	getpolls();
+$('#old_polls').show();
+$('#add_poll_form').hide();
+
+
+}
+var numerofoptions = 0;
+
+$(document).on("click", "#create_new_poll", function () {
+	
+	
+$('#poll_title_input').val('');
+    $('#poll_ref_id').val('NEW');
+    var inputs = $('#option_inputs').empty();
+    inputs.append('<input  class="form-control" placeholder="Option 1" type="text" name="options[' + 0 + ']" value="" /><br> ');
+    inputs.append('<input  class="form-control"  placeholder="Option 2" type="text" name="options[' + 1 + ']" value="" /><br> ');
+    numerofoptions = 3;
+	$('#add_poll_form').show();
+});
+$('#addoptions').click(function () {
+
+    if (numerofoptions > 5) {
+        showPop("Option Limit Exceeded", "A poll can have up to 5 options.");
+
+    } else {
+        var inputs = $('#option_inputs');
+        current_numer = numerofoptions - 1;
+
+        inputs.append('<input  class="form-control"  placeholder="Option ' + numerofoptions + '" type="text" name="options[' + current_numer + ']" value="" /><br> ');
+        numerofoptions++;
+
     }
+
+
+});
+
+$('#savepollsettings').click(function () {
+    var poll_title = $('#poll_title_input').val();
+    var ref_id = $('#poll_ref_id').val();
+    var options = new Array();
+    $("[name^='options']").each(function () {
+
+        options.push($(this).val());
+    });
+  
+    var request = getRequestObject({
+        poll_title: poll_title,
+        ref_id: ref_id,
+        options: options,
+
+    }, "SAVE_POLL_SETTINGS");
+    $.post(SERVER_URL, request, function (result) {
+        if (result.RESULT == "SUCCESS") {
+			showPop("Poll Added","Poll has been added.");
+			$('#add_poll_form').hide();
+
+           getpolls();
+
+        } 
+    }, "json");
+});
+
+function getpolls(){
+	var request = getRequestObject({
+    }, "GETPOLLS");
+    $.post(SERVER_URL, request, function (result) {
+        if (result.RESULT == "SUCCESS") {
+			
+				showPolls(result.DATA);
+          // getpolls();
+
+        } 
+    }, "json");
+	
+}
+function showPolls(data){
+	
+
+	$('#old_poll_line').empty();
+	for (counter = 0; counter < data.length; counter++) {
+		var newRow = $('<tr style="font-size:11px">');
+		var cols = "";
+		cols += '<td>' + (counter + 1) + '</td>';
+		cols += '<td>' + data[counter]["poll_title"] + '</td>';
+		cols += '<td>';
+		for(count=0;count<data[counter]["options"].length;count++){
+			cols+='<div>'+(count + 1)+'. '+data[counter]["options"][count]["option_title"]+'</div>';
+			
+		}
+		cols+='</td>';
+		cols += '<td>' + data[counter]["date"] + '</td>';
+	
+	
+		cols += '</tr>';
+		newRow.append(cols);
+		$('#old_poll_line').append(newRow);
+	}
+	var oTable = $("#old_poll_table").dataTable({
+		"bSort": true,
+		"bRetrieve": true,
+		"bProcessing": true,
+		"bDestroy": true
+	});
+	$('#old_poll_table').show();
+	
+	
+}
+// polls end here
