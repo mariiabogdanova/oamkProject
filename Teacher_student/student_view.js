@@ -21,9 +21,9 @@ pollResults();
 function pollResults()
 {
   var numberofresults;
- 
+  var results ="";
 
 $('#pollAnalyzis').html(1224);
 
-
+results+=''
 }
