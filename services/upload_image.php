@@ -13,7 +13,7 @@ $type = $_POST["typehere_simple"];
                     if (!file_exists($newname)) {
                         if ((move_uploaded_file($_FILES['uploadLogo_simple']['tmp_name'], $newname))) 
                               $outmsg="Logo uploaded successfully.";
-						echo("Asdfafds");
+					
                              ?>
                             <script src="../assets/js/jquery.min.js"></script>
                             <script>

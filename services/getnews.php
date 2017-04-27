@@ -5,8 +5,29 @@
 	require_once( 'db_include.php' );	
 
 
+   $teacher_id= $_POST["uid"];
 
 
+function getSelectedNews($teacher_id){
+	
+$query="SELECT news_selection FROM `teacher_content` where teacher_id='$teacher_id'";
+$resultCheck=mysql_query($query);
+	if (!$resultCheck) {
+			
+			return false;	
+		}else{
+		
+		$alldata=array();
+		while ($row = mysql_fetch_assoc($resultCheck)) {
+               
+                     array_push($alldata, $row);
+                    
+             
+            }
+		
+	}
+	return $alldata;	
+}	
 	
 	$query = "SELECT * FROM `admin_content`";
 $result = mysql_query($query);	
@@ -21,7 +42,8 @@ $result = mysql_query($query);
                     
              
             }
-		$output['RESULT'] = 'SUCCESS';     
+		$output['RESULT'] = 'SUCCESS';
+		$output['SELECTED']=getSelectedNews($teacher_id);
 		$output['DATA'] =$alldata;     
 	}
        

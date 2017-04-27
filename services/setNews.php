@@ -7,17 +7,15 @@
     $teacher_id= $_POST["uid"];
 	
 
-	$ref_id = $_POST["ref_id"];
-	$ref_news = $_POST["ref_news"];
-	$ref_val = $_POST["ref_val"];
 	
+	$news = $_POST["ref_news"];
+	
+$news=implode(",",$news);
 
 
  
-        
- if($value==true){
-	 
-	  $tempsql = "UPDATE `teacher_content` SET $ref_news='$ref_val' where teacher_id='$teacher_id'";
+ 	 
+	  $tempsql = "UPDATE `teacher_content` SET news_selection='$news' where teacher_id='$teacher_id'";
 	
 		$result  = mysql_query($tempsql);
   if (!$result) {
@@ -30,11 +28,7 @@
         $output = '{"RESULT": "SUCCESS"}';       
             }
  
- }else{
-	 
-	 $output = '{"RESULT": "FAILED"}';
- }
-
+ 
        
 	
        

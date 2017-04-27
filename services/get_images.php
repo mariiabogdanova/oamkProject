@@ -5,8 +5,8 @@ require_once('db_include.php');
 $adminid = $_POST["uid"];
 
 $msg=array();
-$root = ROOT."/assets/news_images/";
-    
+$root = "/home/otek/06/t6mani00/public_html/ouasNews/assets/news_images/";
+    //echo($root);
       		$files="";
       		$pics=array();
       		$path = null;

@@ -87,7 +87,7 @@
 .modal-backdrop {
     opacity: 0.7 !important;
 }
-#add_teacher,#manage_groups,#Analytics_teacher_group,#manage_students,#Analytics_student,#manage_news,#Add_polls{
+#add_teacher,#manage_groups,#Analytics_teacher_group,#manage_students,#Analytics_student,#manage_news,#Add_polls,#Newsletter_Anaytics{
 	font-size: 10;
 	width:100%;
 }
@@ -134,3 +134,36 @@ label{
     text-align: left;
     padding: 20px;
 }
+
+@media (max-width: 800px) {
+	
+	.PollAREA{
+		
+		padding-left: 0px;
+		
+    margin-left: -15px;
+    padding-right: 15px!important;
+    margin-top: 15px;
+	}
+	#MainContent {
+		
+		margin-top:0px;
+	}
+	.welcomemessage{
+		width:100% !important;
+	}
+	.MAIN{
+		 width: 100%;
+    padding-right: 15px !important;
+		
+	}   
+}
+@media (min-width: 801px) {
+	#MainContent {
+		
+		margin-top:400px;
+	}
+}
+
+
+	

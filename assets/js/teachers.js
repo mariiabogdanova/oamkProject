@@ -12,6 +12,7 @@ function bodyLoaded() {
 	} else {
 		showLogin();
 	}
+	
 }
 
 function showLoading() {
@@ -55,6 +56,7 @@ function showLoggedInPage() {
 	teacherInfoManager();
 	getSelectedPollandResult();
 	getCurrentVideo("show");
+	displaySelectedNews();
 }
 
 function setUserToLoggedOut() {
@@ -129,7 +131,7 @@ function showcontactinfo() {
 function showEditInfo() {
 	$("#contentmanager").slideDown("slow");
 	teacherInfoManager();
-	
+
 }
 
 function showEditNewsletter() {
@@ -450,12 +452,12 @@ function getExistingPolls() {
 	$.post(SERVER_URL, request, function (result) {
 		stopLoading();
 		if (result.RESULT == "SUCCESS") {
-			showallpolls(result.DATA,result.SELECTED);
+			showallpolls(result.DATA, result.SELECTED);
 		}
 	}, "json");
 }
 
-function showallpolls(totaldata,selected) {
+function showallpolls(totaldata, selected) {
 	$('#poll_list_lines').empty();
 	for (counter = 0; counter < totaldata.length; counter++) {
 		var newRow = $('<tr style="font-size:11px" >');
@@ -463,24 +465,24 @@ function showallpolls(totaldata,selected) {
 		var ref = totaldata[counter]["id"];
 		cols += '<td>' + ref + '</td>';
 		cols += '<td style="font-size:12pt">' + totaldata[counter]["poll_title"] + '</td><td width="100px">';
-		
-		if (selected.length>0) {
-			if(selected[0]["poll_id"]==ref){
+
+		if (selected.length > 0) {
+			if (selected[0]["poll_id"] == ref) {
 				cols += '<input ref_id="' + ref + '" ref_action="poll_id"  class="polltitleact" type="checkbox" checked>';
-			}else{
-				
+			} else {
+
 				cols += '<input ref_id="' + ref + '" ref_action="poll_id"  class="polltitleact" type="checkbox" >';
 			}
-			
+
 		} else {
 			cols += '<input ref_id="' + ref + '" ref_action="poll_id" class="polltitleact" type="checkbox">';
 		}
 		cols += '</td><td>';
-		if (selected.length>0) {
-			if(selected[0]["result_id"]==ref){
+		if (selected.length > 0) {
+			if (selected[0]["result_id"] == ref) {
 				cols += '<input ref_id="' + ref + '" ref_action="result_id"  class="polltitleact" type="checkbox" checked>';
-			}else{
-				
+			} else {
+
 				cols += '<input ref_id="' + ref + '" ref_action="result_id"  class="polltitleact" type="checkbox" >';
 			}
 		} else {
@@ -501,28 +503,29 @@ function showallpolls(totaldata,selected) {
 		"bInfo": false,
 	});
 	$('#polladdedit_menu').hide();
-	
+
 	$('#pollsettingsmodal').modal();
 	$("#poll_list").css("width", "100%");
 	$('#poll_list').show();
 }
 $(document).on("click", ".polltitleact", function () {
-		var ref_id = $(this).attr("ref_id");
-		var ref_action = $(this).attr("ref_action");
-		var value=$(this).is(":checked");
-	if(value){
-		actiononpoll(ref_id, ref_action,value);
+	var ref_id = $(this).attr("ref_id");
+	var ref_action = $(this).attr("ref_action");
+	var value = $(this).is(":checked");
+	if (value) {
+		actiononpoll(ref_id, ref_action, value);
 	}
-		 
-	});
-function actiononpoll(ref_id, ref_action,value){
-	
-	
-		showLoading();
+
+});
+
+function actiononpoll(ref_id, ref_action, value) {
+
+
+	showLoading();
 	var request = getRequestObject({
-		ref_id:ref_id,
-ref_action:ref_action,
-value:value
+		ref_id: ref_id,
+		ref_action: ref_action,
+		value: value
 	}, "SETSELECTEDPOLL");
 	$.post(SERVER_URL, request, function (result) {
 		stopLoading();
@@ -533,92 +536,137 @@ value:value
 	}, "json");
 }
 
-function getSelectedPollandResult(){
-		showLoading();
-	var request = getRequestObject({
-			}, "GETSELECTEDPOLLANDRESULT");
+function getSelectedPollandResult() {
+	showLoading();
+	var request = getRequestObject({}, "GETSELECTEDPOLLANDRESULT");
 	$.post(SERVER_URL, request, function (result) {
 		stopLoading();
 		if (result.RESULT == "SUCCESS") {
-			//showPolls(result.DATA);
+			showPolls(result.DATA);
+			showpollresult(result.DATA[0]["RESULT"]);
 		}
 	}, "json");
-	
+
 }
+
+function showpollresult(data) {
+    var total_Votes = 0;
+    var registerd_Votes = new Object();
+    for (var c = 0; c < data.length; c++) {
+      //  var votedata = data["OPTIONS"][votes];
+       var votedata =data[c]["voted"];
+       total_Votes += Number(votedata);
+      
+        registerd_Votes[data[c]["option_title"]] = Number(votedata);
+    }
+    $('#total_voters').html(total_Votes);
+
+
+    var allvotes = "";
+    for (var votes = 0; votes < data.length; votes++) {
+        var per = ((Number(data[votes]["voted"]) / total_Votes) * 100).toFixed(0);
+        var indvote = '<div ><div style="text-align:left;    line-height: 19px;" class="row">' + data[votes]["option_title"] + '<span style="text-align:right;float:right">' + per + '%</span></div><div class=" row progress" style="height:15px">  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="' + per + '"  aria-valuemin="0" aria-valuemax="100" style="width:' + per + '%"> </div></div></div>'
+        allvotes += indvote;
+    }
+    $('#votedarea').html(allvotes);
+    $('#votedareatitle').html(data[0]["TITLE"]);
+
+
+}
+function showPolls(data) {
+    $("#active_poll").empty();
+    var pollcontent = "";
+    var polltitle = data[0]["POLL"][0]["poll_title"];
+    pollcontent += '<div class="poll_title">' + polltitle + '</div>';
+    pollcontent += '<div class="poll_options">';
+    for (var opts = 0; opts < data[0]["POLL"][0]["OPTIONS"].length; opts++) {
+
+        var pollopt = '<div class="col-xs-12" style="margin-bottom:15px;margin-left:-15px"><div class="marker hvr-radial-in" ref_id="' +  data[0]["POLL"][0]["OPTIONS"][opts]["id"] + '" ref_poll="' +  data[0]["POLL"][0]["id"] + '"></div><div class="poll">' +  data[0]["POLL"][0]["OPTIONS"][opts]["option_title"] + '</div></div>';
+        pollcontent += pollopt;
+    }
+    pollcontent += '</div>';
+    $("#active_poll").html(pollcontent);
+    $("#poll_title_here").html('This month’s question');
+ 
+
+}
+
 
 //poll here
 //video here
 
 
 $(document).on("click", "#video_Setter", function () {
-	
-	
-	
+
+
+
 	openVideoSettings();
-		 
-	});
+
+});
 
 $(document).on("click", "#save_Video", function () {
 	showLoading();
-	var video_title=$('#tutor_video_title').val();
-var video_details=$('#video_details').val();
-var video_code=$('#video_code').val();
+	var video_title = $('#tutor_video_title').val();
+	var video_details = $('#video_details').val();
+	var video_code = $('#video_code').val();
 	var request = getRequestObject({
-		video_title:video_title,
-video_details:video_details,
-video_code:video_code
-			}, "SAVEVIDEO");
+		video_title: video_title,
+		video_details: video_details,
+		video_code: video_code
+	}, "SAVEVIDEO");
 	$.post(SERVER_URL, request, function (result) {
 		stopLoading();
 		if (result.RESULT == "SUCCESS") {
 			getCurrentVideo("show");
 		}
 	}, "json");
-	
-	
-	
 
-		 
-	});
-function openVideoSettings(){
 
-$('#tutor_video_title').val('');
-$('#video_details').val('');
-$('#video_code').val('');
-	
+
+
+
+});
+
+function openVideoSettings() {
+
+	$('#tutor_video_title').val('');
+	$('#video_details').val('');
+	$('#video_code').val('');
+
 	getCurrentVideo("GET");
-	
+
 }
-function getCurrentVideo(type){
-	
+
+function getCurrentVideo(type) {
+
 	var request = getRequestObject({
-		
-			}, "GETVIDEO");
+
+	}, "GETVIDEO");
 	$.post(SERVER_URL, request, function (result) {
 		stopLoading();
 		if (result.RESULT == "SUCCESS") {
-				if(type=="GET"){
-					
-					$('#tutor_video_title').val('');
-$('#video_details').val('');
-$('#video_code').val('');	
-					
-					if(result.DATA.length>0){
-						$('#tutor_video_title').val(result.DATA[0]["video_title"]);
-						$('#video_details').val(result.DATA[0]["video_desc"]);
-						$('#video_code').val(result.DATA[0]["video_code"]);	
-					
-						
-					}
-				
-				$('#videoSettings').modal();
+			if (type == "GET") {
+
+				$('#tutor_video_title').val('');
+				$('#video_details').val('');
+				$('#video_code').val('');
+
+				if (result.DATA.length > 0) {
+					$('#tutor_video_title').val(result.DATA[0]["video_title"]);
+					$('#video_details').val(result.DATA[0]["video_desc"]);
+					$('#video_code').val(result.DATA[0]["video_code"]);
+
+
 				}
-			var video_code='<div class="col-xs-6"><div></div><div></div></div><div class="col-xs-6"><div></div></div>';
-			if(result.DATA.length>0){
-			var video_code='<div class="col-xs-6"><div class="video_title">'+result.DATA[0]["video_title"]+'</div><div class="video_desc">'+result.DATA[0]["video_desc"]+'</div></div><div class="col-xs-6">'+result.DATA[0]["video_code"]+'</div>';
+
+				$('#videoSettings').modal();
 			}
-				$('#video_here').html(video_code);
-		
+			var video_code = '<div class="col-xs-6"><div></div><div></div></div><div class="col-xs-6"><div></div></div>';
+			if (result.DATA.length > 0) {
+				var video_code = '<div class="col-xs-6"><div class="video_title">' + result.DATA[0]["video_title"] + '</div><div class="video_desc">' + result.DATA[0]["video_desc"] + '</div></div><div class="col-xs-6">' + result.DATA[0]["video_code"] + '</div>';
+			}
+			$('#video_here').html(video_code);
+
 		}
 	}, "json");
 }
@@ -631,96 +679,129 @@ $('#video_code').val('');
 
 
 $(document).on("click", "#editNews", function () {
-	var request = getRequestObject({
-			}, "getnews");
+	getSelectedNews();
+
+});
+
+function getSelectedNews() {
+	var request = getRequestObject({}, "getnews");
 	$.post(SERVER_URL, request, function (result) {
 		stopLoading();
 		if (result.RESULT == "SUCCESS") {
-			showNews(result.DATA);
+			showNews(result.DATA, result.SELECTED);
 		}
 	}, "json");
-	
-});
+}
+function displaySelectedNews() {
+	var request = getRequestObject({}, "getnews");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			displayNews(result.DATA, result.SELECTED);
+		}
+	}, "json");
+}
+function saveNewsSetings() {
+	var request = getRequestObject({
+		ref_news: selected_news
+	}, "setNews");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+			getSelectedNews();
+		}
+	}, "json");
 
+
+}
 $(document).on("click", ".checkboxes_for_news", function () {
-	
-	//var current
-	
-	var ref_id=$(this).attr("id");
-	
-	var ischecked=$(this).is(":checked");
-	
-	if(ischecked==true){
-		
-		howmanyselected++;
-		
-	}else{
-		
-		howmanyselected--;
+
+
+	var ref_id = $(this).attr("id");
+	var ischecked = $(this).is(":checked");
+
+
+
+	if (ischecked == true) {
+		if (selected_news.length < 3) {
+			selected_news.push(ref_id);
+			saveNewsSetings();
+		} else {
+			showPop("Error", "You can only select three news topics");
+			getSelectedNews();
+		}
+
+	} else {
+
+
+		var index = selected_news.indexOf(ref_id);
+		if (index > -1) {
+			selected_news.splice(index, 1);
+		}
+		saveNewsSetings();
 	}
 
-	
-	if (howmanyselected==1){
-	$('#news_box_1 .title').html(allnews[ref_id]["content_title"]);
-	$('#news_box_1 .body').html(allnews[ref_id]["content_description"]);
-	$('#news_image_1').attr('src','../assets/news_images/'+allnews[ref_id]["content_photo"]);
-		
-		
-		
+	/*
+	if (howmanyselected == 1) {
+		$('#news_box_1 .title').html(allnews[ref_id]["content_title"]);
+		$('#news_box_1 .body').html(allnews[ref_id]["content_description"]);
+		$('#news_image_1').attr('src', '../assets/news_images/' + allnews[ref_id]["content_photo"]);
+
+
+
 	}
-	
-		if (howmanyselected==2){
-	$('#news_box_2 .title').html(allnews[ref_id]["content_title"]);
-	$('#news_box_2 .body').html(allnews[ref_id]["content_description"]);
-	$('#news_image_2').attr('src','../assets/news_images/'+allnews[ref_id]["content_photo"]);
+
+	if (howmanyselected == 2) {
+		$('#news_box_2 .title').html(allnews[ref_id]["content_title"]);
+		$('#news_box_2 .body').html(allnews[ref_id]["content_description"]);
+		$('#news_image_2').attr('src', '../assets/news_images/' + allnews[ref_id]["content_photo"]);
 	}
-	
-		if (howmanyselected==3){
-	$('#news_box_3 .title').html(allnews[ref_id]["content_title"]);
-	$('#news_box_3 .body').html(allnews[ref_id]["content_description"]);
-	$('#news_image_3').attr('src','../assets/news_images/'+allnews[ref_id]["content_photo"]);
-		
+
+	if (howmanyselected == 3) {
+		$('#news_box_3 .title').html(allnews[ref_id]["content_title"]);
+		$('#news_box_3 .body').html(allnews[ref_id]["content_description"]);
+		$('#news_image_3').attr('src', '../assets/news_images/' + allnews[ref_id]["content_photo"]);
+
 	}
-	
-	if (howmanyselected>3){
-		alert("You can only select three news topics");
-		
-	}
-	
+*/
+
+
 
 });
-var allnews=new Array();
-var howmanyselected=0;
-function showNews(DATA){
-	var content="";
-	
-	
-	
+var allnews = new Array();
+var selected_news = new Array();
 
-	$('#news_list_lines').empty()
+function displayNews(DATA, SELECTED) {
+	var content = "";
+	var sel = new Array();
+	var seledcount = 1;
+	var seled = SELECTED[0]["news_selection"];
+	sel = seled.split(",");
+
+	$('#news_box_1 .title').html('');
+	$('#news_box_1 .body').html('');
+	$('#news_image_1').attr('src', '../assets/news_images/');
+	$('#news_box_2 .title').html('');
+	$('#news_box_2 .body').html('');
+	$('#news_image_2').attr('src', '../assets/news_images/');
+	$('#news_box_3 .title').html('');
+	$('#news_box_3 .body').html('');
+	$('#news_image_3').attr('src', '../assets/news_images/');
 	for (count = 0; count < DATA.length; count++) {
-		var newRow = $('<tr style="font-size:11px">');
-		var cols = "";
-		cols += '<td>' + (count + 1) + '</td>';
-		cols += '<td>' + DATA[count]["content_title"] + '</td>';
-		cols += '<td><input type="checkbox" class="checkboxes_for_news" id="'+DATA[count]["id"]+'"/></td>';
-		
-		cols += '</tr>';
-		newRow.append(cols);
-		$('#news_list_lines').append(newRow);
+	var now = DATA[count]["id"];
+		if (sel.indexOf(now) > -1) {
+			$('#news_box_' + seledcount + ' .title').html(DATA[count]["content_title"]);
+			$('#news_box_' + seledcount + ' .body').html(DATA[count]["content_description"]);
+			$('#news_image_' + seledcount).attr('src', '../assets/news_images/' + DATA[count]["content_photo"]);
+			seledcount++;
+		}
 	}
-	var oTable = $("#news_list").dataTable({
-		"bSort": true,
-		"bRetrieve": true,
-		"bProcessing": true,
-		"bDestroy": true
-	});
-	$('#news_list').show();
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	/*
 	for(var count=0;count<DATA.length;count++){
 		
@@ -732,9 +813,80 @@ function showNews(DATA){
 		
 	}$('#news_content').html(content);
 	*/
-	
+
+
+}
+function showNews(DATA, SELECTED) {
+	var content = "";
+	var sel = new Array();
+	var seledcount = 1;
+	var seled = SELECTED[0]["news_selection"];
+	sel = seled.split(",");
+
+	$('#news_box_1 .title').html('');
+	$('#news_box_1 .body').html('');
+	$('#news_image_1').attr('src', '../assets/news_images/');
+	$('#news_box_2 .title').html('');
+	$('#news_box_2 .body').html('');
+	$('#news_image_2').attr('src', '../assets/news_images/');
+	$('#news_box_3 .title').html('');
+	$('#news_box_3 .body').html('');
+	$('#news_image_3').attr('src', '../assets/news_images/');
+	selected_news = [];
+	$('#news_list_lines').empty()
+	for (count = 0; count < DATA.length; count++) {
+		var newRow = $('<tr style="font-size:11px">');
+
+		var cols = "";
+		cols += '<td>' + (count + 1) + '</td>';
+		cols += '<td>' + DATA[count]["content_title"] + '</td>';
+		var now = DATA[count]["id"];
+		if (sel.indexOf(now) > -1) {
+
+
+			selected_news.push(DATA[count]["id"]);
+			cols += '<td><input type="checkbox" class="checkboxes_for_news" id="' + DATA[count]["id"] + '" checked/></td>';
+
+			$('#news_box_' + seledcount + ' .title').html(DATA[count]["content_title"]);
+			$('#news_box_' + seledcount + ' .body').html(DATA[count]["content_description"]);
+			$('#news_image_' + seledcount).attr('src', '../assets/news_images/' + DATA[count]["content_photo"]);
+			seledcount++;
+
+		} else {
+			cols += '<td><input type="checkbox" class="checkboxes_for_news" id="' + DATA[count]["id"] + '"/></td>';
+
+		}
+
+		cols += '</tr>';
+		newRow.append(cols);
+		$('#news_list_lines').append(newRow);
+	}
+	var oTable = $("#news_list").dataTable({
+		"bSort": true,
+		"bRetrieve": true,
+		"bProcessing": true,
+		"bDestroy": true
+	});
+	$('#news_list').show();
+
+
+
+
+
+	/*
+	for(var count=0;count<DATA.length;count++){
+		
+			allnews[DATA[count]["id"]]=DATA[count];
+		content+='<div class="col-xs-12" ><div class="col-xs-6">'+(count+1)+'. ';
+		content+=DATA[count]["content_title"];
+		content+='</div><div class="col-xs-6"><input type="checkbox" class="checkboxes_for_news" id="'+DATA[count]["id"]+'"/></div></div>';
+		
+		
+	}$('#news_content').html(content);
+	*/
+
 	$('#newsPopup').modal();
-	
+
 }
 
 

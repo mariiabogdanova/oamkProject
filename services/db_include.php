@@ -9,10 +9,20 @@ if($LIVE_SITE==true)
 }
 else if($STAGE_SITE==true)
 {
+	
+	defined( 'parentFile' ) or die( 'You Can Not Access This File' );
+define( "DATABASE_SERVER", "mysli.oamk.fi" );
+define( "DATABASE_NAME", "opisk_t6mani00" );
+define( "DATABASE_USERNAME", "t6mani00" );
+define( "DATABASE_PASSWORD", "44GKqzN3pck3QQeY" );
+define("USER_ROLE_ADMIN",10);
+define("USER_ROLE_TEACHER",5);
+define("ROOT",$_SERVER['DOCUMENT_ROOT']);
+date_default_timezone_set('Europe/Helsinki'); 
 }
 else if($LOCAL_SITE==true)
 {
-defined( 'parentFile' ) or die( 'You Can Not Access This File' );
+
 define( "DATABASE_SERVER", "localhost" );
 define( "DATABASE_NAME", "ouasnews" );
 define( "DATABASE_USERNAME", "root" );

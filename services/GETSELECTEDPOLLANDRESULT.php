@@ -17,6 +17,23 @@ function getoptions($poll_id){
         }
     return $alldata;
 }
+
+function getpollresult($poll_id){
+                $alldata       = array();
+    $tempsql = "SELECT count(a.id) as voted,(b.option_title),c.poll_title as TITLE FROM `poll_answers` a, poll_options b,poll c where a.poll_id='$poll_id' and a.option_id=b.id and c.id='$poll_id'group by option_id order by voted desc";			
+		$result  = mysql_query($tempsql);
+        if (!$result) {
+            doLog("No poll options Avilable!!!");
+     
+        } else {   
+
+			while ($row = mysql_fetch_assoc($result)) {
+				array_push($alldata, $row);           
+            }
+        }
+    return $alldata;
+}
+
 function getSelectedPoll($poll_id){
      $alldata       = array();
     $tempsql = "SELECT * FROM `poll` where id='$poll_id'";	
@@ -48,7 +65,7 @@ function getSelectedPoll($poll_id){
 					$row["POLL"]=getSelectedPoll($row["poll_id"]);	
 				}
                 if($row["result_id"]!=0){
-					$row["RESULT"]=getSelectedPoll($row["poll_id"]);		
+					$row["RESULT"]=getpollresult($row["result_id"]);		
 				}
 				
 			

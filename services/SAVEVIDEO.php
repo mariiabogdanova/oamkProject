@@ -14,7 +14,7 @@ $video_code=mysql_real_escape_string($_POST["video_code"]);
 video_title='$video_title',
 video_desc='$video_details',
 video_code='$video_code'";
-echo($query);
+//echo($query);
 $result = mysql_query($query);	
 	if(!$result){
 		$output['RESULT'] = 'FAILED';     

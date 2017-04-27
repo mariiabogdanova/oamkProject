@@ -4,7 +4,7 @@
 	$user_level=USER_ROLE_TEACHER;
 
 
-$query = "select count(A.student_code) as STUDENTS,B.group_name as GROUPNAME from students A, groups B where B.id=a.group_id group by A.group_id";
+$query = "select count(A.student_code) as STUDENTS,B.group_name as GROUPNAME from students A, groups B where B.id=A.group_id group by A.group_id";
 
 	$result = mysql_query($query);	
 	if(!$result){

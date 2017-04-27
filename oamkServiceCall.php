@@ -1,7 +1,7 @@
 <?php
 	$appservice = $_POST["oamkSERVICE"];
 	try {
-		switch( $appservice ) {		2dd	
+		switch( $appservice ) {			
 			case "USERLOGIN" : require 'services/UserLogin.php';
 			break;
 			case "CREATENEWUSER" : require 'services/CreateUser.php';
@@ -36,6 +36,8 @@
 			break; 
 			case "GETPOLLS" : require 'services/GETPOLLS.php';
 			break; 
+			case "GETANALYTICS" : require 'services/GETANALYTICS.php';
+			break; 
 			//teacherCalls begins here
 			case "TEACHERLOGIN" : require 'services/TEACHERLOGIN.php';
 			break;
@@ -58,6 +60,13 @@
 			case "getnews" : require 'services/getnews.php';
 			break;
 			case "setNews" : require 'services/setNews.php';
+			break;
+			//newsletterareas
+			case "GETSTUDENTINFO" : require 'services/GETSTUDENTINFO.php';
+			break;
+			case "REGISTER_CLICKS" : require 'services/REGISTER_CLICKS.php';
+			break;
+			case "REGISTER_POLL" : require 'services/REGISTER_POLL.php';
 			break;
 
 

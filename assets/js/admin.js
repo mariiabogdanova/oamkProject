@@ -12,8 +12,8 @@ var adminMenuArray = [{
 	fnct: ["Add_News", "Add_polls"],
 }, {
 	group: "Analytics",
-	items: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"],
-	fnct: ["Newsletter Anaytics", "Stuents Analytics", "Teachers Analytics"]
+	items: ["Newsletter Anaytics"],
+	fnct: ["Newsletter_Anaytics"]
 }];
 var student_links = new Array();
 var imageSelected="";
@@ -111,9 +111,54 @@ function showContent(ref_id) {
 		case "Add_polls":
 			managePolls();
 			break;
+			
+			
+		case "Newsletter_Anaytics":
+			GETANALYTICS();
+			break;
 		default:
 	}
 }
+
+
+/// analytics
+
+
+function GETANALYTICS(){
+	showLoading();
+	var request = getRequestObject({}, "GETANALYTICS");
+	$.post(SERVER_URL, request, function (result) {
+		stopLoading();
+		if (result.RESULT == "SUCCESS") {
+				var ALLDATA=result.DATA;
+			var student="";
+			var content="";
+			var clickarea="";
+			var clickcount="";
+			var group ="";
+				for(var i=0;i<ALLDATA.length;i++){
+					student=ALLDATA[i]["first_name"];
+					clickarea=ALLDATA[i]["click_type"];
+					clickcount=ALLDATA[i]["TOTAL"];
+					group=ALLDATA[i]["group_id"];
+					content+='<tr><td>'+(i+1)+'</td><td>'+student+'</td><td>'+clickarea+'</td><td>'+clickcount+'</td><td>'+group+'</td></tr>';
+				
+				}
+			//$('#newsAnalytics').html(student);
+			$('#analytics_table').html(content);
+				var oTable = $("#mariia_is_cool").dataTable({
+		"bSort": true,
+		"bRetrieve": true,
+		"bProcessing": true,
+		"bDestroy": true
+	});
+		} else {}
+	}, "json");
+	
+}
+
+
+//end analytics
 //manage news here
 
 function manageNews() {
@@ -638,7 +683,7 @@ function fillStudentsTable(data) {
 
 function showlink(ref) {
 	var title = "Students Specific Linker";
-	var body = '<a href="../students/student_view.html?access_token=' + student_links[ref]["access_code"] + '" class="btn btn-xs btn-info" target="_blank">Link</a>';
+	var body = '<a href="../newsletter/index.html?access_token=' + student_links[ref]["access_code"] + '" class="btn btn-xs btn-info" target="_blank">Link</a>';
 	showPop(title, body);
 }
 $(document).on("click", "#add_students", function () {

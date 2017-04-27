@@ -74,7 +74,7 @@ if(checkforteacherinfo($teacher_id)){
 
 if(checkforContent($teacher_id)){
 	$query = "update teacher_content set tutor_message_title='$tutor_message_title',tutor_message_body='$tutor_message_body',tutor_note='$tutor_note',in_the_news='$in_the_news',featured_poll='$featured_poll',poll_result='$poll_result',title_message='$title_message',subtitle_message='$subtitle_message' where teacher_id='$teacher_id'";
-	echo($query);
+//	echo($query);
 	$result = mysql_query($query);	
 
 	
