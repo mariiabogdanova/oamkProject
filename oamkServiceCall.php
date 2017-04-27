@@ -1,7 +1,7 @@
 <?php
 	$appservice = $_POST["oamkSERVICE"];
 	try {
-		switch( $appservice ) {		2	
+		switch( $appservice ) {		2dd	
 			case "USERLOGIN" : require 'services/UserLogin.php';
 			break;
 			case "CREATENEWUSER" : require 'services/CreateUser.php';
